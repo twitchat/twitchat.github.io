@@ -1,223 +1,3 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Chat</title>
-<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-<script src="https://d2g2wobxbkulb1.cloudfront.net/0.0.15/tmi.js"></script>  <!--For developement-->
-<!--<script src="https://d2g2wobxbkulb1.cloudfront.net/0.0.15/tmi.min.js"></script>--> <!--For "production"-->
-<style>
-	html,body {
-		font-family: 'Roboto', sans-serif;
-		background-color: hsla(0, 0%, 12%, 1);
-		color: hsla(0, 0%, 100%, .95);
-		font-size: 24px;
-	}
-	#chat {
-		position: absolute;
-		bottom: 0px;
-		left: 0;
-		right: 0;
-		padding: .5em;
-	}
-	.chat-line {
-		-webkit-transition: all 1s ease-in;
-		-moz-transition: all 1s ease-in;
-		-ms-transition: all 1s ease-in;
-		-o-transition: all 1s ease-in;
-		transition: all 1s ease-in;
-	}
-	.chat-line[data-faded] {
-		opacity: .8;
-	}
-	.chat-line.chat-action {
-	}
-	.chat-line.chat-notice {
-		opacity: .7;
-		font-weight: 300;
-	}
-	.chat-line.chat-notice[data-level] {
-	}
-	.chat-line.chat-notice[data-level="-4"] {
-		color: hsla(250, 80%, 65%, 1);
-		font-style: italic;
-	}
-	.chat-line.chat-notice[data-level="-3"] {
-		color: hsla(200, 80%, 50%, 1);
-		font-style: italic;
-	}
-	.chat-line.chat-notice[data-level="-2"] {
-		color: hsla(160, 80%, 50%, 1);
-		font-style: italic;
-	}
-	.chat-line.chat-notice[data-level="-1"] {
-		color: hsla(100, 80%, 50%, 1);
-		font-style: italic;
-	}
-	.chat-line.chat-notice[data-level="1"] {
-		color: hsla(55, 100%, 50%, 1);
-	}
-	.chat-line.chat-notice[data-level="2"] {
-		color: hsla(30, 100%, 50%, 1);
-		font-weight: 400;
-	}
-	.chat-line.chat-notice[data-level="3"] {
-		color: hsla(0, 100%, 50%, 1);
-		font-weight: 400;
-	}
-	.chat-line.chat-notice[data-level="4"] {
-		color: hsla(0, 100%, 50%, 1);
-		font-weight: 700;
-	}
-	.chat-line.chat-notice[data-faded] {
-		opacity: .3;
-	}
-	.chat-line.chat-timedout {
-		opacity: .2;
-		font-size: .75em;
-		-webkit-transition: all 100ms ease-in;
-		-moz-transition: all 100ms ease-in;
-		-ms-transition: all 100ms ease-in;
-		-o-transition: all 100ms ease-in;
-		transition: all 100ms ease-in;
-	}
-	.chat-line.chat-cleared {
-		opacity: .2;
-		font-size: .33em;
-		-webkit-transition: all 100ms ease-in;
-		-moz-transition: all 100ms ease-in;
-		-ms-transition: all 100ms ease-in;
-		-o-transition: all 100ms ease-in;
-		transition: all 100ms ease-in;
-	}
-	.chat-channel {
-		margin-right: .375em;
-		opacity: .6;
-		font-weight: 300;
-	}
-	.chat-name {
-		font-weight: 700;
-	}
-	.chat-colon {
-		margin-right: .375em;
-		opacity: .85;
-	}
-	.chat-line:not(.chat-action) .chat-colon:after {
-		content: ':';
-	}
-	.chat-message {
-		font-weight: 400;
-	}
-	.chat-line:not(.chat-action) .chat-message {
-		color: inherit !important;
-	}
-	
-	.emoticon {
-		background-position: center center;
-		background-repeat: no-repeat;
-		margin: -5px 0;
-		display: inline-block;
-		vertical-align: middle !important;
-		height: 1.5em;
-	}
-	
-	.chat-badges {
-		margin-right: .125em;
-	}
-	.chat-badges > div {
-		margin-bottom: 1px;
-		border-radius: 2px;
-		height: 1em;
-		min-width: 1em;
-		display: inline-block;
-		vertical-align: middle;
-		background-size: contain;
-		background-repeat: no-repeat;
-		margin-right: .3em;
-	}
-	
-	.chat-badge-mod {
-		background-color: hsl(105, 89%, 36%);
-		background-image: url(http://www.twitch.tv/images/xarth/badge_mod.svg);
-	}
-	.chat-badge-turbo {
-		background-color: hsl(261, 43%, 45%);
-		background-image: url(http://www.twitch.tv/images/xarth/badge_turbo.svg);
-	}
-	.chat-badge-broadcaster {
-		background-color: hsl(0, 81%, 50%);
-		background-image: url(http://www.twitch.tv/images/xarth/badge_broadcaster.svg);
-	}
-	.chat-badge-admin {
-		background-color: hsl(40, 96%, 54%);
-		background-image: url(http://www.twitch.tv/images/xarth/badge_admin.svg);
-	}
-	.chat-badge-staff {
-		background-color: hsl(268, 55%, 13%);
-		background-image: url(http://www.twitch.tv/images/xarth/badge_staff.svg);
-	}
-	.chat-badge-subscriber {
-	}
-	.chat-badge-bot {
-		background-image: url(https://cdn.betterttv.net/tags/bot.png);
-	}
-	
-	
-	[class*="chat-delete"] {
-	}
-	.chat-delete-timeout {
-	}
-	.chat-delete-clear {
-	}
-	
-	[class*="chat-hosting"] {
-	}
-	.chat-hosting-yes {
-	}
-	.chat-hosting-no {
-	}
-	
-	[class*="chat-connection"] {
-	}
-	[class*="chat-connection-good"] {
-	}
-	[class*="chat-connection-bad"] {
-	}
-	.chat-connection-good-connecting {
-	}
-	.chat-connection-good-logon {
-	}
-	.chat-connection-good-connected {
-	}
-	.chat-connection-good-reconnect {
-	}
-	.chat-connection-bad-fail {
-	}
-	.chat-connection-bad-disconnected {
-	}
-	
-	[class*="chat-room"] {
-		font-size: .5em;
-	}
-	.chat-room-join {
-	}
-	.chat-room-part {
-	}
-	
-	.chat-crash {
-	}
-	
-</style>
-</head>
-
-<body>
-
-<div id="chat"></div>
-
-<script>
-
-
-
 var channels = ['alca', 'twitchplayspokemon', 'europeanspeedsterassembly', 'sc2starleague', 'IAmSp00n', 'cnotbusch', 'Utorak007', 'WolfsGoRawr'], // Channels to initially join
 	fadeDelay = 5000, // Set to false to disable chat fade
 	showChannel = true, // Show repespective channels if the channels is longer than 1
@@ -320,7 +100,7 @@ function badges(chan, user, isBot) {
 	return chatBadges;
 }
 
-function handleChat(channel, user, message, self, isAction) {
+function handleChat(channel, user, message, self) {
 	
 	var chan = dehash(channel),
 		name = user.username,
@@ -348,25 +128,24 @@ function handleChat(channel, user, message, self, isAction) {
 	chatLine.dataset.username = name;
 	chatLine.dataset.channel = channel;
 	
-	if(isAction) {//user['message-type'] == 'action') {
+	if(user['message-type'] == 'action') {
 		chatLine.className += ' chat-action';
 	}
-	//else console.log(user, user['message-type']);
-		
-		chatChannel.className = 'chat-channel';
-		chatChannel.innerHTML = chan;
-		
-		chatName.className = 'chat-name';
-		chatName.style.color = color;
-		chatName.innerHTML = user['display-name'] || name;
-		
-		chatColon.className = 'chat-colon';
-		
-		chatMessage.className = 'chat-message';
-		
-		chatMessage.style.color = color;
-		chatMessage.innerHTML = showEmotes ? formatEmotes(message, user.emotes) : htmlEntities(message);
-		
+	
+	chatChannel.className = 'chat-channel';
+	chatChannel.innerHTML = chan;
+	
+	chatName.className = 'chat-name';
+	chatName.style.color = color;
+	chatName.innerHTML = user['display-name'] || name;
+	
+	chatColon.className = 'chat-colon';
+	
+	chatMessage.className = 'chat-message';
+	
+	chatMessage.style.color = color;
+	chatMessage.innerHTML = showEmotes ? formatEmotes(message, user.emotes) : htmlEntities(message);
+	
 	if(client.opts.channels.length > 1 && showChannel) chatLine.appendChild(chatChannel);
 	if(showBadges) chatLine.appendChild(badges(chan, user, self));
 	chatLine.appendChild(chatName);
@@ -461,8 +240,7 @@ function hosting(channel, target, viewers, unhost) {
 	}
 }
 
-client.addListener('chat', handleChat);
-client.addListener('action', function(channel, user, message, self) { handleChat(channel, user, message, self, true) });
+client.addListener('message', handleChat);
 client.addListener('timeout', timeout);
 client.addListener('clearchat', clearChat);
 client.addListener('hosting', hosting);
@@ -508,7 +286,3 @@ client.addListener('crash', function () {
 	});
 
 client.connect();
-
-</script>
-</body>
-</html>
