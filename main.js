@@ -1,4 +1,4 @@
-var channels = ['alca', 'twitchplayspokemon', 'europeanspeedsterassembly', 'sc2starleague', 'IAmSp00n', 'cnotbusch', 'Utorak007', 'WolfsGoRawr'], // Channels to initially join
+var channels = ['yongjhih', 'alca', 'twitchplayspokemon', 'europeanspeedsterassembly', 'sc2starleague', 'IAmSp00n', 'cnotbusch', 'Utorak007', 'WolfsGoRawr'], // Channels to initially join
 	fadeDelay = 5000, // Set to false to disable chat fade
 	showChannel = true, // Show repespective channels if the channels is longer than 1
 	useColor = true, // Use chatters' colors or to inherit
