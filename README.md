@@ -1,4 +1,4 @@
-# Yongjhih's Twitter Chat Suptitle
+# Twitter Chat Suptitle
 
 Twitch 聊天訊息彈幕
 
@@ -9,3 +9,7 @@ Twitch 聊天訊息彈幕
 ```
 http://twitchat.github.io/?channel=yongjhih
 ```
+
+ref.
+
+* http://twitchat.github.io/
