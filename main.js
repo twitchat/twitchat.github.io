@@ -219,6 +219,15 @@ function handleChat(channel, user, message, self) {
 }
 
 function chatNotice(information, noticeFadeDelay, level, additionalClasses) {
+	var danmaku = {
+		"mode": 1,
+		"text": information,
+		"stime": 0,
+		"size": 25,
+		"color": 0xeeeeee,
+		"dur": 10000
+	};
+	CM.send(danmaku);
 	/*
 	var ele = document.createElement('div');
 	
