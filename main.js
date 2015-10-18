@@ -143,6 +143,7 @@ function badges(chan, user, isBot) {
 }
 
 function handleChat(channel, user, message, self) {
+	/*
 	var chan = dehash(channel),
 		name = user.username,
 		chatLine = document.createElement('div'),
@@ -205,6 +206,7 @@ function handleChat(channel, user, message, self) {
 		var oldMessages = [].slice.call(chat.children).slice(0, 10);
 		for(var i in oldMessages) oldMessages[i].remove();
 	}
+	*/
 	var danmaku = {
 		"mode": 1,
 		"text": message,
@@ -217,6 +219,7 @@ function handleChat(channel, user, message, self) {
 }
 
 function chatNotice(information, noticeFadeDelay, level, additionalClasses) {
+	/*
 	var ele = document.createElement('div');
 	
 	ele.className = 'chat-line chat-notice';
@@ -242,6 +245,7 @@ function chatNotice(information, noticeFadeDelay, level, additionalClasses) {
 	}
 	
 	return ele;
+	*/
 }
 
 var recentTimeouts = {};
