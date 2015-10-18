@@ -7,7 +7,7 @@ Twitch 聊天訊息彈幕面板。類似 bilibili, niconico 影音網站的彈�
 網址參數寫上台名，例如: yongjhih 台名：
 
 ```
-http://twitchat.github.io/?channel=yongjhih
+http://twitchat.github.io/?channel=twitchplayspokemon
 ```
 
 * 目前彈幕的 Color key: `1e1e1e` 就可背景透明了
@@ -15,7 +15,6 @@ http://twitchat.github.io/?channel=yongjhih
 ## 範例影片 Demo Video
 
 * https://youtu.be/lmmO6zVhh1o
-
 
 ## Development
 
@@ -56,11 +55,11 @@ client.on("chat", function (channel, user, message, self) {
 
 ## Live Demo
 
-* suptitle only: http://twitchat.github.io/?channel=twitchplayspokemon
-* player with suptitle: http://twitchat.github.io/twitchplayspokemon-twitch.html?channel=twitchplayspokemon
-* suptitle only: http://twitchat.github.io/?channel=mistakelolz
-* player with suptitle: http://twitchat.github.io/mistakelolz-twitch.html?channel=mistakelolz
+* twitchplayspokemon: suptitle only: http://twitchat.github.io/?channel=twitchplayspokemon
+* twitchplayspokemon: player with suptitle: http://twitchat.github.io/twitchplayspokemon-twitch.html?channel=twitchplayspokemon
+* mistakelolz: suptitle only: http://twitchat.github.io/?channel=mistakelolz
+* mistakelolz: player with suptitle: http://twitchat.github.io/mistakelolz-twitch.html?channel=mistakelolz
 
 ## FAQ
 
-* Twitter 暗色聊天室背景 19191e
+* Twitch 暗色聊天室背景 19191e
