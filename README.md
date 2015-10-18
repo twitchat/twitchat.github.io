@@ -1,9 +1,11 @@
 # Yongjhih's Twitter Chat Suptitle
 
-![](art/suptitle.png)
+Twitch 聊天訊息彈幕
 
-ref.
+![](art/twichat-screenshot.png)
 
-* http://yongjhih.github.io/yongjhih-twitch-chat/
-* http://yongjhih.github.io/yongjhih-twitch-chat/?channel=yongjhih
-* http://www.twitch.tv/yongjhih
+網址參數寫上台名，例如: yongjhih 台名：
+
+```
+http://twitchat.github.io/?channel=yongjhih
+```
