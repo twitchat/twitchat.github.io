@@ -10,7 +10,13 @@ Twitch 聊天訊息彈幕面板。類似 bilibili, niconico 影音網站的彈�
 http://twitchat.github.io/?channel=yongjhih
 ```
 
+* 目前彈幕的 Color key: `1e1e1e` 就可背景透明了
+
 ## 範例影片 Demo Video
 
 * https://youtu.be/lmmO6zVhh1o
 
+
+## FAQ
+
+* Twitter 暗色聊天室背景 19191e
