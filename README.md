@@ -17,6 +17,35 @@ http://twitchat.github.io/?channel=yongjhih
 * https://youtu.be/lmmO6zVhh1o
 
 
+## Development
+
+
+init:
+
+```js
+var CM = new CommentManager($('#danmu'));
+CM.init();
+CM.start();
+window.CM = CM; // global
+```
+
+send chat as suptitle:
+
+```js
+// old: client.addListener('message', function (channel, user, message, self) {});
+client.on("chat", function (channel, user, message, self) {
+    var danmaku = {
+        "mode": 1,
+        "text": message,
+        "stime": 0,
+        "size": 25,
+        "color": 0xffffff,
+        "dur": 10000
+    };
+    CM.send(danmaku);
+});
+```
+
 ## FAQ
 
 * Twitter 暗色聊天室背景 19191e
