@@ -54,6 +54,13 @@ client.on("chat", function (channel, user, message, self) {
 });
 ```
 
+## Live Demo
+
+* suptitle only: http://twitchat.github.io/?channel=twitchplayspokemon
+* player with suptitle: http://twitchat.github.io/twitchplayspokemon-twitch.html?channel=twitchplayspokemon
+* suptitle only: http://twitchat.github.io/?channel=mistakelolz
+* player with suptitle: http://twitchat.github.io/mistakelolz-twitch.html?channel=mistakelolz
+
 ## FAQ
 
 * Twitter 暗色聊天室背景 19191e
