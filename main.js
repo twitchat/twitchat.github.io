@@ -1,11 +1,19 @@
+window.addEventListener('load', function () {
+});
 $(document).ready(function() {
-	//$('#danmu').danmu('danmuResume');
-	//$("#danmu").danmu("addDanmu",[
-			//{ text:"yo",color:"white",size:1,position:0,time:2}
-	//]);
-        //$("#danmu").danmu("addDanmu",[
-                        //{ text:"yo",color:"white",size:1,position:0,time:10}
-        //]);
+	var CM = new CommentManager($('#danmu'));
+	CM.init();
+	CM.start();
+	//var danmaku = {
+		//"mode": 1,
+		//"text": "hello world",
+		//"stime": 0,
+		//"size": 25,
+		//"color": 0xff00ff,
+		//"dur": 10000
+	//};
+	//CM.send(danmaku);
+
 var channels = ['yongjhih', 'alca', 'twitchplayspokemon', 'europeanspeedsterassembly', 'sc2starleague', 'IAmSp00n', 'cnotbusch', 'Utorak007', 'WolfsGoRawr'], // Channels to initially join
 	fadeDelay = 5000, // Set to false to disable chat fade
 	showChannel = true, // Show repespective channels if the channels is longer than 1
@@ -171,20 +179,15 @@ function handleChat(channel, user, message, self) {
 		var oldMessages = [].slice.call(chat.children).slice(0, 10);
 		for(var i in oldMessages) oldMessages[i].remove();
 	}
-	
-	$('#danmu').danmu('danmuResume');
-	$("#danmu").danmu("addDanmu",[
-			{ text:message,color:"white",size:1,position:0,time:5}
-	]);
-	$("#danmu").danmu("addDanmu",[
-			{ text:"yo6",color:"white",size:1,position:0,time:6}
-	]);
-	$("#danmu").danmu("addDanmu",[
-			{ text:"yo7",color:"white",size:1,position:0,time:7}
-	]);
-	$("#danmu").danmu("addDanmu",[
-			{ text:"yo8",color:"white",size:1,position:0,time:8}
-	]);
+	var danmaku = {
+		"mode": 1,
+		"text": "hello world",
+		"stime": 0,
+		"size": 25,
+		"color": 0xff00ff,
+		"dur": 10000
+	};
+	//CM.send(danmaku);
 }
 
 function chatNotice(information, noticeFadeDelay, level, additionalClasses) {
@@ -274,20 +277,6 @@ var joinAccounced = [];
 client.addListener('connecting', function (address, port) {
 		if(showConnectionNotices) {
 			chatNotice('Connecting', 1000, -4, 'chat-connection-good-connecting');
-			//$('#danmu').danmu('danmuResume');
-			//$("#danmu").danmu("addDanmu",[
-				//{ text:"Connecting",color:"white",size:1,position:0,time:2}
-			//]);
-			//$("#danmu").danmu("addDanmu",[
-				//{ text:"Connecting2",color:"white",size:1,position:0,time:3}
-			//]);
-			//$('#danmu').danmu('danmuResume');
-			//$("#danmu").danmu("addDanmu",[
-				//{ text:"Connecting3",color:"white",size:1,position:0,time:4}
-			//]);
-			//$("#danmu").danmu("addDanmu",[
-				//{ text:"Connecting4",color:"white",size:1,position:0,time:5}
-			//]);
 		}
 	});
 client.addListener('logon', function () {
