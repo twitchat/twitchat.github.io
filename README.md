@@ -19,19 +19,27 @@ http://twitchat.github.io/?channel=yongjhih
 
 ## Development
 
+Dependencies:
 
-init:
+* CommentCoreLibrary (https://github.com/jabbany/CommentCoreLibrary)
+* tmi.js (https://github.com/Schmoopiie/tmi.js)
+
+Flow:
+
+Initialize comment manager by CommentCoreLibrary:
 
 ```js
+// ref. https://github.com/jabbany/CommentCoreLibrary/blob/master/docs/Intro.md#调用api函数-api-calls
 var CM = new CommentManager($('#danmu'));
 CM.init();
 CM.start();
 window.CM = CM; // global
 ```
 
-send chat as suptitle:
+Send twitch chat as suptitle by tmi.js:
 
 ```js
+// ref. http://www.tmijs.org/docs/Events.md#chat
 // old: client.addListener('message', function (channel, user, message, self) {});
 client.on("chat", function (channel, user, message, self) {
     var danmaku = {
