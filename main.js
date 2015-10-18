@@ -1,3 +1,11 @@
+$(document).ready(function() {
+	//$('#danmu').danmu('danmuResume');
+	//$("#danmu").danmu("addDanmu",[
+			//{ text:"yo",color:"white",size:1,position:0,time:2}
+	//]);
+        //$("#danmu").danmu("addDanmu",[
+                        //{ text:"yo",color:"white",size:1,position:0,time:10}
+        //]);
 var channels = ['yongjhih', 'alca', 'twitchplayspokemon', 'europeanspeedsterassembly', 'sc2starleague', 'IAmSp00n', 'cnotbusch', 'Utorak007', 'WolfsGoRawr'], // Channels to initially join
 	fadeDelay = 5000, // Set to false to disable chat fade
 	showChannel = true, // Show repespective channels if the channels is longer than 1
@@ -101,7 +109,6 @@ function badges(chan, user, isBot) {
 }
 
 function handleChat(channel, user, message, self) {
-	
 	var chan = dehash(channel),
 		name = user.username,
 		chatLine = document.createElement('div'),
@@ -165,6 +172,19 @@ function handleChat(channel, user, message, self) {
 		for(var i in oldMessages) oldMessages[i].remove();
 	}
 	
+	$('#danmu').danmu('danmuResume');
+	$("#danmu").danmu("addDanmu",[
+			{ text:message,color:"white",size:1,position:0,time:5}
+	]);
+	$("#danmu").danmu("addDanmu",[
+			{ text:"yo6",color:"white",size:1,position:0,time:6}
+	]);
+	$("#danmu").danmu("addDanmu",[
+			{ text:"yo7",color:"white",size:1,position:0,time:7}
+	]);
+	$("#danmu").danmu("addDanmu",[
+			{ text:"yo8",color:"white",size:1,position:0,time:8}
+	]);
 }
 
 function chatNotice(information, noticeFadeDelay, level, additionalClasses) {
@@ -248,8 +268,27 @@ client.addListener('unhost', function(channel, viewers) { hosting(channel, null,
 
 var joinAccounced = [];
 
+//client.on("chat", function (channel, user, message, self) {
+//});
+
 client.addListener('connecting', function (address, port) {
-		if(showConnectionNotices) chatNotice('Connecting', 1000, -4, 'chat-connection-good-connecting');
+		if(showConnectionNotices) {
+			chatNotice('Connecting', 1000, -4, 'chat-connection-good-connecting');
+			//$('#danmu').danmu('danmuResume');
+			//$("#danmu").danmu("addDanmu",[
+				//{ text:"Connecting",color:"white",size:1,position:0,time:2}
+			//]);
+			//$("#danmu").danmu("addDanmu",[
+				//{ text:"Connecting2",color:"white",size:1,position:0,time:3}
+			//]);
+			//$('#danmu').danmu('danmuResume');
+			//$("#danmu").danmu("addDanmu",[
+				//{ text:"Connecting3",color:"white",size:1,position:0,time:4}
+			//]);
+			//$("#danmu").danmu("addDanmu",[
+				//{ text:"Connecting4",color:"white",size:1,position:0,time:5}
+			//]);
+		}
 	});
 client.addListener('logon', function () {
 		if(showConnectionNotices) chatNotice('Authenticating', 1000, -3, 'chat-connection-good-logon');
@@ -286,3 +325,4 @@ client.addListener('crash', function () {
 	});
 
 client.connect();
+});
