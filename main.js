@@ -1,18 +1,17 @@
-window.addEventListener('load', function () {
-});
 $(document).ready(function() {
 	var CM = new CommentManager($('#danmu'));
 	CM.init();
 	CM.start();
-	//var danmaku = {
-		//"mode": 1,
-		//"text": "hello world",
-		//"stime": 0,
-		//"size": 25,
-		//"color": 0xff00ff,
-		//"dur": 10000
-	//};
-	//CM.send(danmaku);
+	window.CM = CM;
+	var danmaku = {
+		"mode": 1,
+		"text": "hello world",
+		"stime": 0,
+		"size": 25,
+		"color": 0xffffff,
+		"dur": 10000
+	};
+	CM.send(danmaku);
 
 var channels = ['yongjhih', 'alca', 'twitchplayspokemon', 'europeanspeedsterassembly', 'sc2starleague', 'IAmSp00n', 'cnotbusch', 'Utorak007', 'WolfsGoRawr'], // Channels to initially join
 	fadeDelay = 5000, // Set to false to disable chat fade
@@ -181,13 +180,13 @@ function handleChat(channel, user, message, self) {
 	}
 	var danmaku = {
 		"mode": 1,
-		"text": "hello world",
+		"text": message,
 		"stime": 0,
 		"size": 25,
-		"color": 0xff00ff,
+		"color": 0xffffff,
 		"dur": 10000
 	};
-	//CM.send(danmaku);
+	CM.send(danmaku);
 }
 
 function chatNotice(information, noticeFadeDelay, level, additionalClasses) {

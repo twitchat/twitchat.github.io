@@ -696,7 +696,7 @@ var CommentManager = (function() {
 	function CommentManager(stageObject){
 		var __timer = 0;
 		this._listeners = {};
-		this.stage = stageObject;
+		this.stage = stageObject[0];//修改
 		this.options = {
 			global:{
 				opacity:1,
