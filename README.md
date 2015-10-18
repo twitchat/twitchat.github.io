@@ -1,6 +1,6 @@
 # Twitter Chat Suptitle
 
-Twitch 聊天訊息彈幕
+Twitch 聊天訊息彈幕面板。類似 bilibili, niconico 影音網站的彈幕功能。讓你方便地將彈幕面板即時合成到你的實況影片。
 
 ![](art/twichat-screenshot.png)
 
@@ -10,6 +10,7 @@ Twitch 聊天訊息彈幕
 http://twitchat.github.io/?channel=yongjhih
 ```
 
-ref.
+## 範例影片 Demo Video
 
-* http://twitchat.github.io/
+* https://youtu.be/lmmO6zVhh1o
+
