@@ -60,6 +60,35 @@ client.on("chat", function (channel, user, message, self) {
 
 * Twitch 暗色聊天室背景 Color key: 19191e
 
+## TODO
+
+聊天訊息：
+
+* 彈幕面板
+* 氣泡面板
+* 通知面板
+* 捧讀 (google sister)
+* 紀錄
+
+關注：
+
+* 通知面板
+* 動畫
+* 捧讀 (google sister)
+
+贊助：
+
+* 通知面板
+* 動畫
+* 捧讀 (google sister)
+
+統計：
+
+* 每x/最多發言次數
+* 每x/最多發言字數
+* 每x/熱門關鍵字/詞句
+* 每x/最多贊助金額
+
 ## ref.
 
 * https://github.com/jabbany/CommentCoreLibrary
