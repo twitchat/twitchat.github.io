@@ -1,17 +1,10 @@
-.chat {
-  font-family: sans-serif;
-  font-size: small;
-  margin: 50px 20px;
-  padding: 10px;
-  border: 1px solid #aaa;
-}
-
+/* ref. http://dec0de.me/2012/10/pure-css-bubbles/ */
 .bubble {
-  background-color: #F2F2F2;
+  background-color: #555;
   border-radius: 5px;
-  border: 1px solid #bbb;
-  box-shadow: 0 1px 6px #B2B2B2;
-  display: block;
+  border: 1px solid #444;
+  box-shadow: 0 1px 6px #333;
+  display: inline;
   padding: 10px 18px;
   margin: 1em 18px;
   position: relative;
@@ -26,11 +19,11 @@
 }
 
 .tail:before {
-  border: 1px solid #bbb;
-  background-color: #F2F2F2;
-  box-shadow: 0 1px 6px #B2B2B2;
+  border: 1px solid #444;
+  background-color: #555;
+  box-shadow: 0 1px 6px #333;
   content: "\00a0";
-  display: block;
+  display: inline;
   position: absolute;
   top: 0px;
   height: 12px;
@@ -48,9 +41,9 @@
 
 .bubble.left .tail:before {
   left: 12px;
-  -webkit-transform: skewX(-45deg);
-  -moz-transform: skewX(-45deg);
-  -o-transform: skewX(-45deg);
+  -webkit-transform: skewX(-125deg);
+  -moz-transform: skewX(-125deg);
+  -o-transform: skewX(-125deg);
 }
 
 .bubble.right {
@@ -64,7 +57,7 @@
 
 .bubble.right .tail:before {
   right: 12px;
-  -webkit-transform: skewX(45deg);
-  -moz-transform: skewX(45deg);
-  -o-transform: skewX(45deg);
+  -webkit-transform: skewX(125deg);
+  -moz-transform: skewX(125deg);
+  -o-transform: skewX(125deg);
 }
