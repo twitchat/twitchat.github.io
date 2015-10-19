@@ -89,6 +89,8 @@ client.on("chat", function (channel, user, message, self) {
 * 每x/熱門關鍵字/詞句
 * 每x/最多贊助金額
 
+* Wavefrom bar
+
 ## ref.
 
 * https://github.com/jabbany/CommentCoreLibrary
