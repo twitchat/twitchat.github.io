@@ -145,7 +145,6 @@ function badges(chan, user, isBot) {
 function handleChat(channel, user, message, self) {
 	var chan = dehash(channel),
 		name = user.username,
-		chatBubble = document.createElement('div'),
 		chatLine = document.createElement('div'),
 		chatTail = document.createElement('span'),
 		chatChannel = document.createElement('span'),
@@ -177,7 +176,6 @@ function handleChat(channel, user, message, self) {
 
 	chatTail.className = 'tail';
 	chatTail.innerHTML = htmlEntities(" ");
-	//chatTail.innerHTML = "&nbsp;";
         chatLine.appendChild(chatTail);
 	
 	chatChannel.className = 'chat-channel';
@@ -200,13 +198,11 @@ function handleChat(channel, user, message, self) {
 	chatLine.appendChild(chatColon);
 	chatLine.appendChild(chatMessage);
 	
-
-	chatBubble.appendChild(chatLine);
-	chat.appendChild(chatBubble);
+	chat.appendChild(chatLine);
 	
 	if(typeof fadeDelay == 'number') {
 		setTimeout(function() {
-				chatBubble.dataset.faded = '';
+				chatLine.dataset.faded = '';
 			}, fadeDelay);
 	}
 	
