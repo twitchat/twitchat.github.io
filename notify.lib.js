@@ -165,7 +165,7 @@ pluginOptions = {
   className: 'info',
   showAnimation: 'slideDown',
   showDuration: 400,
-  hideAnimation: 'slideUp',
+  hideAnimation: 'hide',
   hideDuration: 200,
   gap: 5
 };
