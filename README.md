@@ -65,7 +65,8 @@ client.on("chat", function (channel, user, message, self) {
 
 ![](art/screenshot-notification.png)
 
-* http://twitchat.github.io/notify.html
+* Live: http://twitchat.github.io/notify.html
+* Demo Video: https://youtu.be/LIRVj18cHwk
 
 彈幕面板 Suptitle player:
 
