@@ -166,7 +166,7 @@ pluginOptions = {
   showAnimation: 'slideDown',
   showDuration: 400,
   hideAnimation: 'hide',
-  hideDuration: 200,
+  hideDuration: 0,
   gap: 5
 };
 
