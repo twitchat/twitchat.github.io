@@ -4,26 +4,22 @@ Twitch 聊天訊息彈幕面板。類似 bilibili, niconico 影音網站的彈�
 
 ![](art/twichat-screenshot.png)
 
-網址參數寫上台名，例如: yongjhih 台名：
+網址參數寫上台名，例如: twitchplayspokemon 台名： http://twitchat.github.io/?channel=twitchplayspokemon
 
-```
-http://twitchat.github.io/?channel=twitchplayspokemon
-```
-
-* 目前彈幕的 Color key: `1e1e1e` 就可背景透明了
+* 目前彈幕背景 Color key: `1e1e1e` 就可背景透明了
 
 ## 範例影片 Demo Video
 
 * https://youtu.be/lmmO6zVhh1o
 
-## Development
+## 開發 Development
 
 Dependencies:
 
 * CommentCoreLibrary (https://github.com/jabbany/CommentCoreLibrary)
 * tmi.js (https://github.com/Schmoopiie/tmi.js)
 
-Flow:
+流程 Flow:
 
 Initialize comment manager by CommentCoreLibrary:
 
@@ -55,14 +51,14 @@ client.on("chat", function (channel, user, message, self) {
 
 ## Live Demo
 
-* twitchplayspokemon: suptitle only: http://twitchat.github.io/?channel=twitchplayspokemon
-* twitchplayspokemon: player with suptitle: http://twitchat.github.io/twitchplayspokemon-twitch.html?channel=twitchplayspokemon
-* mistakelolz: suptitle only: http://twitchat.github.io/?channel=mistakelolz
-* mistakelolz: player with suptitle: http://twitchat.github.io/mistakelolz-twitch.html?channel=mistakelolz
+* twitchplayspokemon: 僅彈幕 suptitle only: http://twitchat.github.io/?channel=twitchplayspokemon
+* twitchplayspokemon: 播放器+彈幕 player with suptitle: http://twitchat.github.io/twitchplayspokemon-twitch.html?channel=twitchplayspokemon
+* mistakelolz: 僅彈幕 suptitle only: http://twitchat.github.io/?channel=mistakelolz
+* mistakelolz: 播放器+彈幕 player with suptitle: http://twitchat.github.io/mistakelolz-twitch.html?channel=mistakelolz
 
 ## FAQ
 
-* Twitch 暗色聊天室背景 19191e
+* Twitch 暗色聊天室背景 Color key: 19191e
 
 ## ref.
 
