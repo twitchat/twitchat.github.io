@@ -166,7 +166,7 @@ function handleChat(channel, user, message, self) {
 		}
 	}
 	
-	chatLine.className = 'chat-line bubble left';
+	chatLine.className = 'chat-line bubble';
 	chatLine.dataset.username = name;
 	chatLine.dataset.channel = channel;
 	
@@ -174,10 +174,6 @@ function handleChat(channel, user, message, self) {
 		chatLine.className += ' chat-action';
 	}
 
-	chatTail.className = 'tail';
-	chatTail.innerHTML = htmlEntities(" ");
-        chatLine.appendChild(chatTail);
-	
 	chatChannel.className = 'chat-channel';
 	chatChannel.innerHTML = chan;
 	
