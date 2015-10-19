@@ -1,3 +1,18 @@
+$(document).ready(function() {
+	var CM = new CommentManager($('#danmu'));
+	CM.init();
+	CM.start();
+	window.CM = CM;
+	var danmaku = {
+		"mode": 1,
+		"text": "hello, world!",
+		"stime": 0,
+		"size": 25,
+		"color": 0xffffff,
+		"dur": 10000
+	};
+	CM.send(danmaku);
+
 var qs;
 (window.onpopstate = function () {
     var match,
@@ -192,9 +207,27 @@ function handleChat(channel, user, message, self) {
 		var oldMessages = [].slice.call(chat.children).slice(0, 10);
 		for(var i in oldMessages) oldMessages[i].remove();
 	}
+	var danmaku = {
+		"mode": 1,
+		"text": message,
+		"stime": 0,
+		"size": 25,
+		"color": 0xffffff,
+		"dur": 10000
+	};
+	CM.send(danmaku);
 }
 
 function chatNotice(information, noticeFadeDelay, level, additionalClasses) {
+	var danmaku = {
+		"mode": 1,
+		"text": information,
+		"stime": 0,
+		"size": 25,
+		"color": 0xeeeeee,
+		"dur": 10000
+	};
+	CM.send(danmaku);
 	var ele = document.createElement('div');
 	
 	ele.className = 'chat-line chat-notice';
@@ -315,3 +348,4 @@ client.addListener('crash', function () {
 	});
 
 client.connect();
+});
