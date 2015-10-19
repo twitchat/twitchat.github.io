@@ -1,3 +1,4 @@
+$(document).ready(function() {
 var qs;
 (window.onpopstate = function () {
     var match,
@@ -171,7 +172,7 @@ function handleChat(channel, user, message, self) {
 	
 	chatMessage.className = 'chat-message';
 	
-	chatMessage.style.color = color;
+	//chatMessage.style.color = color;
 	chatMessage.innerHTML = showEmotes ? formatEmotes(message, user.emotes) : htmlEntities(message);
 	
 	if(client.opts.channels.length > 1 && showChannel) chatLine.appendChild(chatChannel);
@@ -192,6 +193,8 @@ function handleChat(channel, user, message, self) {
 		var oldMessages = [].slice.call(chat.children).slice(0, 10);
 		for(var i in oldMessages) oldMessages[i].remove();
 	}
+
+	$.notify(chatLine.innerHTML);
 }
 
 function chatNotice(information, noticeFadeDelay, level, additionalClasses) {
@@ -315,3 +318,4 @@ client.addListener('crash', function () {
 	});
 
 client.connect();
+});
