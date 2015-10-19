@@ -153,7 +153,7 @@ function handleChat(channel, user, message, self) {
 		}
 	}
 	
-	chatLine.className = 'chat-line bubble';
+	chatLine.className = 'chat-line';
 	chatLine.dataset.username = name;
 	chatLine.dataset.channel = channel;
 	
@@ -181,7 +181,6 @@ function handleChat(channel, user, message, self) {
 	chatLine.appendChild(chatColon);
 	chatLine.appendChild(chatMessage);
 	chatBubble.appendChild(chatLine);
-	chat.appendChild(chatBubble);
 	
 	if(typeof fadeDelay == 'number') {
 		setTimeout(function() {
@@ -210,11 +209,11 @@ function chatNotice(information, noticeFadeDelay, level, additionalClasses) {
 		ele.className += ' ' + additionalClasses;
 	}
 	
+	$.notify(ele.innerHTML);
+
 	if(typeof level == 'number' && level != 0) {
 		ele.dataset.level = level;
 	}
-	
-	chat.appendChild(ele);
 	
 	if(typeof noticeFadeDelay == 'number') {
 		setTimeout(function() {

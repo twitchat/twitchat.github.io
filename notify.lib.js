@@ -560,9 +560,7 @@ $.notify.addStyle("bootstrap", {
         "background": "#3F4043",
         "-webkit-border-radius": "10px",
         "-moz-border-radius": "10px",
-        "border-radius": "10px",
-        "display": "inline-block",
-        "float": "right"
+        "border-radius": "10px"
     },
     error: {
       "color": "#B94A48",

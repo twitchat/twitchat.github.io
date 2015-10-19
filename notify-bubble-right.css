@@ -1,12 +1,16 @@
+.notifyjs-bootstrap-base {
+    clear: both;
+    float: right;
+}
 .notifyjs-bootstrap-base:after {
     content: '';
     position: absolute;
     border-style: solid;
-    border-width: 5px 0 5px 5px;
+    border-width: 9px 0 9px 9px;
     border-color: transparent #3F4043;
     display: block;
     width: 0;
     z-index: 1;
-    right: -5px;
-    top: 17px;
+    right: -7px;
+    top: 8px;
 }
