@@ -90,6 +90,8 @@ client.on("chat", function (channel, user, message, self) {
 * 每x/最多贊助金額
 
 * Wavefrom bar
+* Click zoom out chat
+
 
 ## ref.
 
