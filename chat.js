@@ -146,6 +146,7 @@ function handleChat(channel, user, message, self) {
 	var chan = dehash(channel),
 		name = user.username,
 		chatLine = document.createElement('div'),
+		chatTail = document.createElement('span'),
 		chatChannel = document.createElement('span'),
 		chatName = document.createElement('span'),
 		chatColon = document.createElement('span'),
@@ -165,13 +166,18 @@ function handleChat(channel, user, message, self) {
 		}
 	}
 	
-	chatLine.className = 'chat-line';
+	chatLine.className = 'chat-line bubble left';
 	chatLine.dataset.username = name;
 	chatLine.dataset.channel = channel;
 	
 	if(user['message-type'] == 'action') {
 		chatLine.className += ' chat-action';
 	}
+
+	chatTail.className = 'tail';
+	chatTail.innerHTML = htmlEntities(" ");
+	//chatTail.innerHTML = "&nbsp;";
+        chatLine.appendChild(chatTail);
 	
 	chatChannel.className = 'chat-channel';
 	chatChannel.innerHTML = chan;
