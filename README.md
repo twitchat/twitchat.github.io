@@ -49,30 +49,32 @@ client.on("chat", function (channel, user, message, self) {
 });
 ```
 
-## Live Demo
-
-* twitchplayspokemon: 僅彈幕 suptitle only: http://twitchat.github.io/?channel=twitchplayspokemon
-* twitchplayspokemon: 播放器+彈幕 player with suptitle: http://twitchat.github.io/twitchplayspokemon-twitch.html?channel=twitchplayspokemon
-* mistakelolz: 僅彈幕 suptitle only: http://twitchat.github.io/?channel=mistakelolz
-* mistakelolz: 播放器+彈幕 player with suptitle: http://twitchat.github.io/mistakelolz-twitch.html?channel=mistakelolz
-
 ## FAQ
 
 * Twitch 暗色聊天室背景 Color key: 19191e
 
 ## Bonus
 
-Notication widget:
-
-![](art/screenshot-notification.png)
-
-Chat widget:
+氣泡面板 Chat widget:
 
 ![](art/screenshot-chat.png)
 
-Suptitle player
+* http://twitchat.github.io/chat.html
+
+通知面板 Notication widget (訊息會一段時間自動消失):
+
+![](art/screenshot-notification.png)
+
+* http://twitchat.github.io/notify.html
+
+彈幕面板 Suptitle player:
 
 ![](art/screenshot-player.png)
+
+* twitchplayspokemon: 僅彈幕 suptitle only: http://twitchat.github.io/?channel=twitchplayspokemon
+* twitchplayspokemon: 播放器+彈幕 player with suptitle: http://twitchat.github.io/twitchplayspokemon-twitch.html?channel=twitchplayspokemon
+* mistakelolz: 僅彈幕 suptitle only: http://twitchat.github.io/?channel=mistakelolz
+* mistakelolz: 播放器+彈幕 player with suptitle: http://twitchat.github.io/mistakelolz-twitch.html?channel=mistakelolz
 
 ## TODO
 
