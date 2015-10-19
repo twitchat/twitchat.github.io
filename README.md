@@ -60,6 +60,20 @@ client.on("chat", function (channel, user, message, self) {
 
 * Twitch 暗色聊天室背景 Color key: 19191e
 
+## Bonus
+
+Notication widget:
+
+![](art/screenshot-notification.png)
+
+Chat widget:
+
+![](art/screenshot-chat.png)
+
+Suptitle player
+
+![](art/screenshot-player.png)
+
 ## TODO
 
 聊天訊息：
