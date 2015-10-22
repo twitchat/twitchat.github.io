@@ -57,6 +57,11 @@ client.on("chat", function (channel, user, message, self) {
 
 氣泡面板 Chat widget:
 
+原本：
+![](art/screenshot-orig-chat.png)
+v1：
+![](art/screenshot-chat.png)
+v2：
 ![](art/screenshot-chat-2.png)
 
 * http://twitchat.github.io/chat.html
