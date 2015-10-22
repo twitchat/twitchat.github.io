@@ -131,10 +131,12 @@ function badges(chan, user, isBot) {
 function handleChat(channel, user, message, self) {
 	var chan = dehash(channel),
 		name = user.username,
-		chatBubble = document.createElement('div'),
-		chatLine = document.createElement('div'),
+		chatBubbler = document.createElement('div'),
+		chatBubble = document.createElement('span'),
+		chatLine = document.createElement('span'),
 		chatTail = document.createElement('span'),
 		chatChannel = document.createElement('span'),
+		chatAvatar = document.createElement('div'),
 		chatName = document.createElement('span'),
 		chatColon = document.createElement('span'),
 		chatMessage = document.createElement('span');
@@ -153,7 +155,7 @@ function handleChat(channel, user, message, self) {
 		}
 	}
 	
-	chatLine.className = 'chat-line';
+	chatLine.className = 'chat-line bubble';
 	chatLine.dataset.username = name;
 	chatLine.dataset.channel = channel;
 	
@@ -172,15 +174,24 @@ function handleChat(channel, user, message, self) {
 	
 	chatMessage.className = 'chat-message';
 	
-	//chatMessage.style.color = color;
+	chatMessage.style.color = color;
 	chatMessage.innerHTML = showEmotes ? formatEmotes(message, user.emotes) : htmlEntities(message);
+
+	chatBubbler.className = 'chat-bubbler';
+	chatAvatar.className = 'chat-avatar';
 	
 	if(client.opts.channels.length > 1 && showChannel) chatLine.appendChild(chatChannel);
 	if(showBadges) chatLine.appendChild(badges(chan, user, self));
-	chatLine.appendChild(chatName);
-	chatLine.appendChild(chatColon);
+	//chatLine.appendChild(chatName);
+	chatAvatar.appendChild(chatName);
+	//chatLine.appendChild(chatColon);
+	chatAvatar.appendChild(chatColon);
 	chatLine.appendChild(chatMessage);
 	chatBubble.appendChild(chatLine);
+	chatBubbler.appendChild(chatAvatar);
+	chatBubbler.appendChild(chatBubble);
+	//chat.appendChild(chatBubbler);
+	$.notify(chatBubbler.innerHTML);
 	
 	if(typeof fadeDelay == 'number') {
 		setTimeout(function() {
@@ -192,8 +203,6 @@ function handleChat(channel, user, message, self) {
 		var oldMessages = [].slice.call(chat.children).slice(0, 10);
 		for(var i in oldMessages) oldMessages[i].remove();
 	}
-
-	$.notify(chatLine.innerHTML);
 }
 
 function chatNotice(information, noticeFadeDelay, level, additionalClasses) {
@@ -209,11 +218,12 @@ function chatNotice(information, noticeFadeDelay, level, additionalClasses) {
 		ele.className += ' ' + additionalClasses;
 	}
 	
-	$.notify(ele.innerHTML);
-
 	if(typeof level == 'number' && level != 0) {
 		ele.dataset.level = level;
 	}
+	
+	//chat.appendChild(ele);
+	$.notify(ele.innerHTML);
 	
 	if(typeof noticeFadeDelay == 'number') {
 		setTimeout(function() {
