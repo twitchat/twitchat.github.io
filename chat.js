@@ -130,10 +130,12 @@ function badges(chan, user, isBot) {
 function handleChat(channel, user, message, self) {
 	var chan = dehash(channel),
 		name = user.username,
-		chatBubble = document.createElement('div'),
-		chatLine = document.createElement('div'),
+		chatBubbler = document.createElement('div'),
+		chatBubble = document.createElement('span'),
+		chatLine = document.createElement('span'),
 		chatTail = document.createElement('span'),
 		chatChannel = document.createElement('span'),
+		chatAvatar = document.createElement('div'),
 		chatName = document.createElement('span'),
 		chatColon = document.createElement('span'),
 		chatMessage = document.createElement('span');
@@ -173,14 +175,21 @@ function handleChat(channel, user, message, self) {
 	
 	chatMessage.style.color = color;
 	chatMessage.innerHTML = showEmotes ? formatEmotes(message, user.emotes) : htmlEntities(message);
+
+	chatBubbler.className = 'chat-bubbler';
+	chatAvatar.className = 'chat-avatar';
 	
 	if(client.opts.channels.length > 1 && showChannel) chatLine.appendChild(chatChannel);
 	if(showBadges) chatLine.appendChild(badges(chan, user, self));
-	chatLine.appendChild(chatName);
-	chatLine.appendChild(chatColon);
+	//chatLine.appendChild(chatName);
+	chatAvatar.appendChild(chatName);
+	//chatLine.appendChild(chatColon);
+	chatAvatar.appendChild(chatColon);
 	chatLine.appendChild(chatMessage);
 	chatBubble.appendChild(chatLine);
-	chat.appendChild(chatBubble);
+	chatBubbler.appendChild(chatAvatar);
+	chatBubbler.appendChild(chatBubble);
+	chat.appendChild(chatBubbler);
 	
 	if(typeof fadeDelay == 'number') {
 		setTimeout(function() {

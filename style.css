@@ -99,6 +99,7 @@ html,body {
 }
 .chat-message {
 	font-weight: 400;
+	word-wrap: break-word;
 }
 .chat-line:not(.chat-action) .chat-message {
 	color: inherit !important;
