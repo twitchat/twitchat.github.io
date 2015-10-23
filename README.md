@@ -112,8 +112,8 @@ v2：
 * 每x/最多贊助金額
 
 * Wavefrom bar
-* Click zoom out chat
-
+* Click zoom out / highlight chat
+* 依人合併聊天訊息
 
 ## ref.
 
