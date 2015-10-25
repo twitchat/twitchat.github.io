@@ -6,19 +6,31 @@
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   <script src="oauth.min.js"></script>
-  <script src="//cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
+  <!-- https://parse.com/docs/downloads -->
+  <script src="//parse.com/downloads/javascript/parse/latest/min.js"></script>
 
   <script>
-    $(document).ready(function() {
+    // heroku-twitchat
+    //Parse.initialize("qf72sinphhRhDhdONYelxs0dfSYyPnwtMrGX8jwv", "niFd0Vh2wLsO307FuncwMi5NW9l8gPOGgpq4NbBT");
+    // parse-twitch8
+    Parse.initialize("nLlru5JLHt6W9w8zqbRhDdAgrWXLjy2cKWJfENmE", "WJAD4erPKNeOy1WNh4dCfWdGkLenDXj7ywTkhOar");
+
+    $(document).ready(function() { // FIXME
         $("#login").click(function(event) {
           OAuth.initialize('yrT4b-wR6_QTxvUy1E5-wPHAFH0')
           OAuth.redirect('twitch', "https://twitchat.github.io/auth.html");
         });
 
         OAuth.callback('twitch').done(function(result) {
-          console.log(result);
+            console.log(result);
+            Parse.Cloud.run("signInWithTwitch", result).then(function(sessionToken) {
+                console.log(sessionToken);
+                return Parse.User.become(sessionToken);
+            }, function(e) {
+                console.log(e);
+            });
         }).fail(function(e) {
-          console.log("Login Failed!", e);
+            console.log(e);
         });
     });
   </script>
