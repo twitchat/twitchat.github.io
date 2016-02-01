@@ -58,19 +58,24 @@ client.on("chat", function (channel, user, message, self) {
 氣泡面板 Chat widget:
 
 原本：
+
 ![](art/screenshot-orig-chat.png)
+
 v1：
+
 ![](art/screenshot-chat.png)
+
 v2：
+
 ![](art/screenshot-chat-2.png)
 
-* http://twitchat.github.io/chat.html
+* http://twitchat.github.io/chat.html?channel=twitchplayspokemon
 
 通知面板 Notication widget (訊息會一段時間自動消失):
 
 ![](art/screenshot-notification.png)
 
-* Live: http://twitchat.github.io/notify.html
+* Live: http://twitchat.github.io/notify.html?channel=twitchplayspokemon
 * Demo Video: https://youtu.be/LIRVj18cHwk
 
 彈幕面板 Suptitle player:
