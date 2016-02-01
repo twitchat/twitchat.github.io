@@ -1,4 +1,4 @@
-# Twitch Chat Suptitle
+# Twitch 聊天彈幕 (chatfall)
 
 Twitch 聊天訊息彈幕面板。類似 bilibili, niconico 影音網站的彈幕功能。讓你方便地將彈幕面板即時合成到你的實況影片。
 
@@ -31,7 +31,7 @@ CM.start();
 window.CM = CM; // global
 ```
 
-Send twitch chat as suptitle by tmi.js:
+Send twitch chat as chatfall by tmi.js:
 
 ```js
 // ref. http://www.tmijs.org/docs/Events.md#chat
@@ -78,7 +78,7 @@ v2：
 * Live: http://twitchat.github.io/notify.html?channel=twitchplayspokemon
 * Demo Video: https://youtu.be/LIRVj18cHwk
 
-彈幕面板 Suptitle player:
+彈幕面板 chatfall player:
 
 ![](art/screenshot-player.png)
 
