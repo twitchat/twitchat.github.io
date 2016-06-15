@@ -83,7 +83,7 @@ v2：
 ![](art/screenshot-player.png)
 
 * twitchplayspokemon: 僅彈幕 suptitle only: http://twitchat.github.io/?channel=twitchplayspokemon
-* twitchplayspokemon: 播放器+彈幕 player with suptitle: http://twitchat.github.io/twitchplayspokemon-twitch.html?channel=twitchplayspokemon
+* twitchplayspokemon: 播放器+彈幕 player with suptitle: http://twitchat.github.io/twitchplayspokemon-player.html?channel=twitchplayspokemon
 * mistakelolz: 僅彈幕 suptitle only: http://twitchat.github.io/?channel=mistakelolz
 * mistakelolz: 播放器+彈幕 player with suptitle: http://twitchat.github.io/mistakelolz-twitch.html?channel=mistakelolz
 
