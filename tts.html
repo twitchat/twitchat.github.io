@@ -1,0 +1,42 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="https://cdn.tmijs.org/js/latest/tmi.js"></script>
+<script type="text/javascript" src="https://rawgithub.com/hiddentao/google-tts/master/google-tts.min.js"></script>
+<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+
+<!--<audio src="" class="speech" hidden />-->
+
+<script>
+$(function() {
+    var channels = ['alca', 'twitchplayspokemon', 'europeanspeedsterassembly', 'sc2starleague', 'IAmSp00n', 'cnotbusch', 'Utorak007', 'WolfsGoRawr'], // Channels to initially join
+        fadeDelay = 5000, // Set to false to disable chat fade
+        showChannel = true, // Show repespective channels if the channels is longer than 1
+        useColor = true, // Use chatters' colors or to inherit
+        showBadges = true, // Show chatters' badges
+        showEmotes = true, // Show emotes in the chat
+        doTimeouts = true, // Hide the messages of people who are timed-out
+        doChatClears = true, // Hide the chat from an entire channel
+        showHosting = true, // Show when the channel is hosting or not
+        showConnectionNotices = true; // Show messages like "Connected" and "Disconnected"
+
+    var clientOptions = {
+        options: {
+            debug: true
+        },
+        channels: channels
+    };
+    var client = new irc.client(clientOptions);
+
+    client.addListener('message', function (channel, user, message, self) {
+        responsiveVoice.speak(message, 'Chinese Female');
+        //var tts = new GoogleTTS('en');
+        //tts.play(encodeURI(message), 'en', function (e) {
+        //    console.log(e);
+        //});
+        //var url = encodeURI("https://translate.google.com/translate_tts?ie=UTF-8&q=" + message + "&tl=en");
+        //console.log(url);
+        //$('audio').attr('src', url).get(0).play();
+    });
+
+    client.connect();
+});
+</script>
