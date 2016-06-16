@@ -62,6 +62,7 @@ var chat = document.getElementById('chat'),
 			options: {
 					debug: true
 				},
+			secure: false,
 			channels: channels
 		},
 	client = new irc.client(clientOptions);
