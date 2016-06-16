@@ -64,6 +64,8 @@ var chat = document.getElementById('chat'),
 				},
 			secure: false,
 			reconnect: true,
+                            username: 'justinfan12345',
+                            password: 'blah',
 			channels: channels
 		},
 	client = new irc.client(clientOptions);
