@@ -63,7 +63,6 @@ var chat = document.getElementById('chat'),
 					debug: true
 				},
                         connection: {
-                            cluster: "aws",
                             secure: false,
                             reconnect: true
                         },

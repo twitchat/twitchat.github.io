@@ -25,7 +25,7 @@ channels = [qs['channel']], // Channels to initially join
 	showHosting = true, // Show when the channel is hosting or not
 	showConnectionNotices = true; // Show messages like "Connected" and "Disconnected"
 } else {
-channels = ['yongjhih', 'mistakelolz', 'twitchplayspokemon'], // Channels to initially join
+channels = ['twitchplayspokemon'], // Channels to initially join
 	fadeDelay = 5000, // Set to false to disable chat fade
 	showChannel = true, // Show repespective channels if the channels is longer than 1
 	useColor = true, // Use chatters' colors or to inherit
@@ -48,6 +48,15 @@ var chat = document.getElementById('chat'),
 			options: {
 					debug: true
 				},
+                        connection: {
+                            secure: false,
+                            server: 'irc-ws.chat.twitch.tv',
+                            reconnect: true
+                        },
+                        identity: {
+                            username: 'justinfan12345',
+                            password: 'blah',
+                        },
 			channels: channels
 		},
 	client = new irc.client(clientOptions);
