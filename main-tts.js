@@ -62,10 +62,15 @@ var chat = document.getElementById('chat'),
 			options: {
 					debug: true
 				},
-			secure: false,
-			reconnect: true,
+                        connection: {
+                            cluster: "aws",
+                            secure: false,
+                            reconnect: true
+                        },
+                        identity: {
                             username: 'justinfan12345',
                             password: 'blah',
+                        },
 			channels: channels
 		},
 	client = new irc.client(clientOptions);
