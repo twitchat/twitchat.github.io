@@ -86,6 +86,7 @@ v2：
 * twitchplayspokemon: 播放器+彈幕 player with suptitle: http://twitchat.github.io/twitchplayspokemon-player.html?channel=twitchplayspokemon
 * mistakelolz: 僅彈幕 suptitle only: http://twitchat.github.io/?channel=mistakelolz
 * mistakelolz: 播放器+彈幕 player with suptitle: http://twitchat.github.io/mistakelolz-player.html?channel=mistakelolz
+* mistakelolz: 谷歌姊+播放器+彈幕 player with suptitle: http://twitchat.github.io/mistakelolz-player-tts.html?channel=mistakelolz
 
 ## TODO
 
