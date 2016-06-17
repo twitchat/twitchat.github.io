@@ -128,6 +128,22 @@ v2：
 * https://github.com/chiruom/jquery.danmu.js
 * https://github.com/jabbany/ABPlayerHTML5
 
+## firebase scripts
+
+~/.firebase/config.json:
+
+{
+    "fffffff": {
+        "secret": "fffffffffffffffffffffffffffffffffffffffff",
+        "users": {
+            "root": {
+                "token": "fffffffffffffffffffffffffffffffffffff"
+            }
+        },
+        "url": "https://fffffff.firebaseio.com/"
+    }
+}
+
 ## LICENSE
 
 Copyright 2015 Andrew Chen
