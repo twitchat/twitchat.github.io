@@ -1,0 +1,23 @@
+{
+  "name": "twitchat",
+  "version": "1.0.0",
+  "description": "twitchat",
+  "main": "firebase-token.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twitchat/twitchat.github.io"
+  },
+  "license": "Apache",
+  "dependencies": {
+    "commander": "~2.9.0",
+    "rx": "~4.1.0",
+    "firebase": "~2.4.2",
+    "firebase-token-generator": ""
+  },
+  "scripts": {
+    "firebase-token": "node firebase-token.js"
+  },
+  "engines": {
+    "node": ">=4.3"
+  }
+}
