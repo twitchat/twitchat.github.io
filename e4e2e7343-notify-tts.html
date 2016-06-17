@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Notification</title>
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css' />
+<link href="style.css" rel="stylesheet" type="text/css" />
+<link href="notify-bubble-left.css" rel="stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<!--<script src="https://d2g2wobxbkulb1.cloudfront.net/0.0.19/tmi.min.js"></script>--> <!--For "production"-->
+<!--<script src="https://cdn.tmijs.org/js/latest/tmi.js"></script>-->
+<script src="tmi.js"></script>
+<script src="http://code.responsivevoice.org/responsivevoice.js"></script>
+<script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyA7ltSjenktMp_s-hWFknE6MFrDX2COIq4",
+    authDomain: "twitch8.firebaseapp.com",
+    databaseURL: "https://twitch8.firebaseio.com",
+    storageBucket: "project-3215579283948407211.appspot.com",
+  };
+  firebase.initializeApp(config);
+</script>
+
+<script src="notify.lib.js"></script>
+</head>
+<body>
+    <div id="chat"></div>
+    <script src="e4e2e7343-notify-tts.js"></script>
+
+</body>
+</html>
