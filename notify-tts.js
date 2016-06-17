@@ -208,6 +208,7 @@ function handleChat(channel, user, message, self) {
         if (message.starsWith('!jp ')) responsiveVoice.speak(message.slice('!jp '.length), 'Japanese Female');
         if (message.starsWith('!kr ')) responsiveVoice.speak(message.slice('!kr '.length), 'Korean Female');
         if (message.starsWith('!us ')) responsiveVoice.speak(message.slice('!us '.length), 'US English Female');
+        if (message.starsWith('!en ')) responsiveVoice.speak(message.slice('!en '.length), 'US English Female');
 }
 
 function chatNotice(information, noticeFadeDelay, level, additionalClasses) {
