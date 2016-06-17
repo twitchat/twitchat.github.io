@@ -48,15 +48,6 @@ var chat = document.getElementById('chat'),
 			options: {
 					debug: true
 				},
-                        connection: {
-                            secure: false,
-                            server: 'irc-ws.chat.twitch.tv',
-                            reconnect: true
-                        },
-                        identity: {
-                            username: 'justinfan12345',
-                            password: 'blah',
-                        },
 			channels: channels
 		},
 	client = new irc.client(clientOptions);
