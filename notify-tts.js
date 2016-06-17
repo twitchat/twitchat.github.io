@@ -204,7 +204,10 @@ function handleChat(channel, user, message, self) {
 		for(var i in oldMessages) oldMessages[i].remove();
 	}
 
-        responsiveVoice.speak(message, 'Chinese Female');
+        if (message.starsWith('!tw ')) responsiveVoice.speak(message.slice('!tw '.length), 'Chinese Female');
+        if (message.starsWith('!jp ')) responsiveVoice.speak(message.slice('!jp '.length), 'Japanese Female');
+        if (message.starsWith('!kr ')) responsiveVoice.speak(message.slice('!kr '.length), 'Korean Female');
+        if (message.starsWith('!us ')) responsiveVoice.speak(message.slice('!us '.length), 'US English Female');
 }
 
 function chatNotice(information, noticeFadeDelay, level, additionalClasses) {

@@ -216,7 +216,36 @@ function handleChat(channel, user, message, self) {
 		"dur": 10000
 	};
 	CM.send(danmaku);
-        responsiveVoice.speak(message, 'Chinese Female');
+
+        /*
+        var voices = {
+            {id: 'uk', name: 'UK English Female'},
+            {id: 'uk-male', name: 'UK English Male'},
+            {id: 'us', name: 'US English Female'},
+            {id: 'sp', name: 'Spanish Female'},
+            {id: 'fr', name: 'French Female'},
+            {id: 'de', name: 'Deutsch Female'},
+            {id: 'it', name: 'Italian Female'},
+            {id: 'gr', name: 'Greek Female'},
+            {id: 'hr', name: 'Hungarian Female'},
+            {id: 'ru', name: 'Russian Female'},
+            {id: 'du', name: 'Dutch Female'},
+            {id: 'sw', name: 'Swedish Female'},
+            {id: 'jp', name: 'Japanese Female'},
+            {id: 'kr', name: 'Korean Female'},
+            {id: 'tw', name: 'Chinese Female'},
+            {id: 'hi', name: 'Hindi Female'},
+            {id: 'sb', name: 'Serbian Male'},
+            {id: 'cr', name: 'Croatian Male'},
+            {id: 'bn', name: 'Bosnian Male'},
+            {id: 'ro', name: 'Romanian Male'},
+            {id: 'uk-f', name: 'Fallback UK Female'}
+        };
+        */
+        if (message.starsWith('!tw ')) responsiveVoice.speak(message.slice('!tw '.length), 'Chinese Female');
+        if (message.starsWith('!jp ')) responsiveVoice.speak(message.slice('!jp '.length), 'Japanese Female');
+        if (message.starsWith('!kr ')) responsiveVoice.speak(message.slice('!kr '.length), 'Korean Female');
+        if (message.starsWith('!us ')) responsiveVoice.speak(message.slice('!us '.length), 'US English Female');
 }
 
 function chatNotice(information, noticeFadeDelay, level, additionalClasses) {
