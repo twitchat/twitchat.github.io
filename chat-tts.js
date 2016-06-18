@@ -309,12 +309,12 @@ client.addListener('join', function (channel, username) {
                         responsiveVoice.speak(welcomeMsg, 'Chinese Female');
                         var user;
                         user = {
-                            username: 'chan',
+                            username: username,
                             name: username,
                             emotes: []
                         };
 
-                        handleChat(channel, user, welcomeMsg, false);
+                        handleChat(channel, user, welcomeMsg, true);
 			joinAccounced.push(channel);
 		}
 	});
