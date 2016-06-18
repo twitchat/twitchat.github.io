@@ -35,10 +35,7 @@ channels = ['yongjhih', 'mistakelolz', 'twitchplayspokemon'], // Channels to ini
 	showHosting = true, // Show when the channel is hosting or not
 	showConnectionNotices = true; // Show messages like "Connected" and "Disconnected"
 }
-
-
-
-
+var channelName = qs['channel_name'] ? qs['channel_name'] : qs['channel'];
 
 var chat = document.getElementById('chat'),
 	defaultColors = ['rgb(255, 0, 0)','rgb(0, 0, 255)','rgb(0, 128, 0)','rgb(178, 34, 34)','rgb(255, 127, 80)','rgb(154, 205, 50)','rgb(255, 69, 0)','rgb(46, 139, 87)','rgb(218, 165, 32)','rgb(210, 105, 30)','rgb(95, 158, 160)','rgb(30, 144, 255)','rgb(255, 105, 180)','rgb(138, 43, 226)','rgb(0, 255, 127)'],
@@ -308,14 +305,15 @@ client.addListener('reconnect', function () {
 client.addListener('join', function (channel, username) {
 		if(joinAccounced.indexOf(channel) == -1) {
 			if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
-                        responsiveVoice.speak('歡迎來到老K的遊戲間 ' + username, 'Chinese Female');
+                        var welcomeMsg = '歡迎來到 ' + channelName + ' 的遊戲間 ' + username;
+                        responsiveVoice.speak(welcomeMsg, 'Chinese Female');
                         var user;
                         user.username = qs['channel'];
                         user.name = qs['channel'];
                         user['display-name'] = qs['channel'];
                         user.emotes = [];
                         user['message-type'] = null;
-                        handleChat(channel, user, '歡迎來到老K的遊戲間 ' + username, self);
+                        handleChat(channel, user, welcomeMsg, self);
 			joinAccounced.push(channel);
 		}
 	});
