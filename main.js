@@ -343,7 +343,6 @@ client.addListener('join', function (channel, username) {
 client.addListener('part', function (channel, username) {
 		var index = joinAccounced.indexOf(channel);
 		if(index > -1) {
-			if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' parted ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-part');
 			joinAccounced.splice(joinAccounced.indexOf(channel), 1)
 		}
 	});
