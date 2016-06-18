@@ -310,15 +310,15 @@ client.addListener('join', function (channel, username) {
                         var user;
                         user = {
                             color: null,
-                            username: qs['channel'],
-                            name: qs['channel'],
-                            'display-name': qs['channel'],
+                            username: username,
+                            name: username,
+                            'display-name': username,
                             emotes: null,
                             'message-type': null
                         };
-                        user.username = qs['channel'];
-                        user.name = qs['channel'];
-                        user['display-name'] = qs['channel'];
+                        user.username = username;
+                        user.name = username;
+                        user['display-name'] = username;
                         user.emotes = [];
                         user['message-type'] = null;
 
