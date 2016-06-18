@@ -198,6 +198,12 @@ function handleChat(channel, user, message, self) {
 		var oldMessages = [].slice.call(chat.children).slice(0, 10);
 		for(var i in oldMessages) oldMessages[i].remove();
 	}
+
+        if (message.startsWith('!tw ')) responsiveVoice.speak(message.slice('!tw '.length), 'Chinese Female');
+        if (message.startsWith('!jp ')) responsiveVoice.speak(message.slice('!jp '.length), 'Japanese Female');
+        if (message.startsWith('!kr ')) responsiveVoice.speak(message.slice('!kr '.length), 'Korean Female');
+        if (message.startsWith('!us ')) responsiveVoice.speak(message.slice('!us '.length), 'US English Female');
+        if (message.startsWith('!en ')) responsiveVoice.speak(message.slice('!en '.length), 'US English Female');
 }
 
 function chatNotice(information, noticeFadeDelay, level, additionalClasses) {
