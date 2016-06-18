@@ -118,7 +118,7 @@ function badges(chan, user, isBot) {
 		}
 	}
 	else {
-		chatChages.appendChild(createBadge('bot'));
+		chatBadges.appendChild(createBadge('bot'));
 	}
 	
 	return chatBadges;
