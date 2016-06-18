@@ -308,6 +308,7 @@ client.addListener('reconnect', function () {
 client.addListener('join', function (channel, username) {
 		if(joinAccounced.indexOf(channel) == -1) {
 			if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
+                        responsiveVoice.speak('歡迎來到老K的遊戲間 ' + username, 'Chinese Female');
 			joinAccounced.push(channel);
 		}
 	});
