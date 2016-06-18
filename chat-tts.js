@@ -213,17 +213,26 @@ function handleChat(channel, user, message, self) {
                     return ref.child("stat").child(user.username);
                 }).flatMap(function (chatterRef) {
                     return firebaseGet(chatterRef).doOnNext(function (chatterSnap) {
+                        var stay_duration = 0;
+                        try {
+                            stay_duration = chatterSnap.val().stay_duration;
+                        } catch (e) {
+                            //console.warn();
+                        }
+
+                        var chat_count = 0;
+                        try {
+                            chat_count = chatterSnap.val().chat_count;
+                        } catch (e) {
+                            //console.warn();
+                        }
+
                         console.log(chatterSnap.key());
                         console.log(chatterSnap.val());
-                        if (chatterSnap.val().chat_count) {
-                            chatterRef.update({
-                                "chat_count": chatterSnap.val().chat_count + 1
-                            });
-                        } else {
-                            chatterRef.update({
-                                "chat_count": 1
-                            });
-                        }
+                        chatterRef.set({
+                            "chat_count": chat_count + 1,
+                            "stay_duration": stay_duration
+                        });
                     });
                 })
                 .subscribe();
@@ -372,22 +381,33 @@ if (qs['firebase']) {
     if (qs['firebase_email'] && qs['firebase_password']) {
         var ref = new Firebase("https://" + qs['firebase'] + ".firebaseio.com/");
         firebaseSignInWithPassword(ref, qs['firebase_email'], qs['firebase_password']).flatMap(function (auth) {
-            return Rx.Observable.interval(30 * SECONDS).timeInterval();
+            return Rx.Observable.interval(15 * SECONDS).timeInterval();
         }).flatMap(function (i) {
             return getChatters(qs['channel']);
         }).map(function (chatter) {
             return ref.child("stat").child(chatter);
         }).flatMap(function (chatterRef) {
             return firebaseGet(chatterRef).doOnNext(function (chatterSnap) {
-                if (chatterSnap.val().stay_duration) {
-                    chatterRef.update({
-                        "stay_duration": chatterSnap.val().stay_duration + 1
-                    });
-                } else {
-                    chatterRef.update({
-                        "stay_duration": 1
-                    });
+                var stay_duration = 0;
+                try {
+                    stay_duration = chatterSnap.val().stay_duration;
+                } catch (e) {
+                    //console.warn();
                 }
+
+                var chat_count = 0;
+                try {
+                    chat_count = chatterSnap.val().chat_count;
+                } catch (e) {
+                    //console.warn();
+                }
+
+                console.log(chatterSnap.key());
+                console.log(chatterSnap.val());
+                chatterRef.set({
+                    "chat_count": chat_count,
+                    "stay_duration": stay_duration + 1
+                });
             });
         })
         .subscribe();
@@ -416,13 +436,17 @@ function getChatters(_channel) {
             }
         });
     }).map(function (body) {
-        return JSON.stringify(body);
+        return body;
+    }).doOnNext(function (chatters) {
+        console.log(chatters.data);
+        console.log(chatters.data.chatters);
+        console.log(chatters.data.chatters.moderators);
     }).flatMap(function (chatters) {
-        return Observable.concat(Observable.from(chatters.chatters.moderators),
-                Observable.from(chatters.chatters.staff),
-                Observable.from(chatters.chatters.admins),
-                Observable.from(chatters.chatters.global_mods),
-                Observable.from(chatters.chatters.viewers));
+        return Rx.Observable.concat(Rx.Observable.from(chatters.data.chatters.moderators),
+                Rx.Observable.from(chatters.data.chatters.staff),
+                Rx.Observable.from(chatters.data.chatters.admins),
+                Rx.Observable.from(chatters.data.chatters.global_mods),
+                Rx.Observable.from(chatters.data.chatters.viewers));
     });
 }
 
