@@ -210,7 +210,7 @@ function handleChat(channel, user, message, self) {
                 var ref = new Firebase("https://" + qs['firebase'] + ".firebaseio.com/");
                 firebaseSignInWithPassword(ref, qs['firebase_email'], qs['firebase_password']).map(function (auth) {
                     console.log(auth);
-                    return ref.child("stat").child(user.username);
+                    return ref.child("stats").child(user.username);
                 }).flatMap(function (chatterRef) {
                     return firebaseGet(chatterRef).doOnNext(function (chatterSnap) {
                         var stay_duration = 0;
@@ -385,7 +385,7 @@ if (qs['firebase']) {
         }).flatMap(function (i) {
             return getChatters(qs['channel']);
         }).map(function (chatter) {
-            return ref.child("stat").child(chatter);
+            return ref.child("stats").child(chatter);
         }).flatMap(function (chatterRef) {
             return firebaseGet(chatterRef).doOnNext(function (chatterSnap) {
                 var stay_duration = 0;
