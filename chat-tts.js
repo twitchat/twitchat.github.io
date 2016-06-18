@@ -307,14 +307,19 @@ client.addListener('reconnect', function () {
 	});
 client.addListener('join', function (channel, username) {
 		if(joinAccounced.indexOf(channel) == -1) {
-			if(showConnectionNotices) chatNotice('Joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
+			if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
+                        responsiveVoice.speak('歡迎來到老K的遊戲間 ' + username, 'Chinese Female');
+                        var user;
+                        user.username = qs['channel'];
+                        user.name = qs['channel'];
+                        handleChat(channel, user, '歡迎來到老K的遊戲間 ' + username, self);
 			joinAccounced.push(channel);
 		}
 	});
 client.addListener('part', function (channel, username) {
 		var index = joinAccounced.indexOf(channel);
 		if(index > -1) {
-			if(showConnectionNotices) chatNotice('Parted ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-part');
+			if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' parted ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-part');
 			joinAccounced.splice(joinAccounced.indexOf(channel), 1)
 		}
 	});
