@@ -125,12 +125,6 @@ function badges(chan, user, isBot) {
 }
 
 function handleChat(channel, user, message, self) {
-    client.api({
-        url: "http://tmi.twitch.tv/group/user/" + qs['channel'] + "/chatters"
-    }, function(err, res, body) {
-        console.log(JSON.parse(body));
-    });
-
 	var chan = dehash(channel),
 		name = user.username,
 		chatBubbler = document.createElement('div'),
@@ -210,6 +204,32 @@ function handleChat(channel, user, message, self) {
         if (message.startsWith('!kr ')) responsiveVoice.speak(message.slice('!kr '.length), 'Korean Female');
         if (message.startsWith('!us ')) responsiveVoice.speak(message.slice('!us '.length), 'US English Female');
         if (message.startsWith('!en ')) responsiveVoice.speak(message.slice('!en '.length), 'US English Female');
+
+        if (qs['firebase']) {
+            if (qs['firebase_email'] && qs['firebase_password']) {
+                var ref = new Firebase("https://" + qs['firebase'] + ".firebaseio.com/");
+                firebaseSignInWithPassword(ref, qs['firebase_email'], qs['firebase_password']).map(function (auth) {
+                    console.log(auth);
+                    return ref.child("stat").child(user.username);
+                }).flatMap(function (chatterRef) {
+                    return firebaseGet(chatterRef).doOnNext(function (chatterSnap) {
+                        console.log(chatterSnap.key());
+                        console.log(chatterSnap.val());
+                        if (chatterSnap.val().chat_count) {
+                            chatterRef.update({
+                                "chat_count": chatterSnap.val().chat_count + 1
+                            });
+                        } else {
+                            chatterRef.update({
+                                "chat_count": 1
+                            });
+                        }
+                    });
+                })
+                .subscribe();
+            }
+        }
+
 }
 
 function chatNotice(information, noticeFadeDelay, level, additionalClasses) {
@@ -343,5 +363,108 @@ client.addListener('part', function (channel, username) {
 client.addListener('crash', function () {
 		chatNotice('Crashed', 10000, 4, 'chat-crash');
 	});
+
+var SECONDS = 1000;
+var MINITES = 60 * SECONDS;
+var HOUR = 60 * MINITES;
+
+if (qs['firebase']) {
+    if (qs['firebase_email'] && qs['firebase_password']) {
+        var ref = new Firebase("https://" + qs['firebase'] + ".firebaseio.com/");
+        firebaseSignInWithPassword(ref, qs['firebase_email'], qs['firebase_password']).flatMap(function (auth) {
+            return Rx.Observable.interval(30 * SECONDS).timeInterval();
+        }).flatMap(function (i) {
+            return getChatters(qs['channel']);
+        }).map(function (chatter) {
+            return ref.child("stat").child(chatter);
+        }).flatMap(function (chatterRef) {
+            return firebaseGet(chatterRef).doOnNext(function (chatterSnap) {
+                if (chatterSnap.val().stay_duration) {
+                    chatterRef.update({
+                        "stay_duration": chatterSnap.val().stay_duration + 1
+                    });
+                } else {
+                    chatterRef.update({
+                        "stay_duration": 1
+                    });
+                }
+            });
+        })
+        .subscribe();
+    }
+}
+
+/**
+ * TODO Move to rx-tmi.js
+ *
+ *  "moderators": [],
+ *  "staff": [],
+ *  "admins": [],
+ *  "global_mods": [],
+ *  "viewers": []
+ */
+function getChatters(_channel) {
+    return Rx.Observable.create(function (observer) {
+        client.api({
+            url: "http://tmi.twitch.tv/group/user/" + _channel + "/chatters"
+        }, function(err, res, body) {
+            if (!err) {
+                observer.onNext(body);
+                observer.onCompleted();
+            } else {
+                observer.onError(err);
+            }
+        });
+    }).map(function (body) {
+        return JSON.stringify(body);
+    }).flatMap(function (chatters) {
+        return Observable.concat(Observable.from(chatters.chatters.moderators),
+                Observable.from(chatters.chatters.staff),
+                Observable.from(chatters.chatters.admins),
+                Observable.from(chatters.chatters.global_mods),
+                Observable.from(chatters.chatters.viewers));
+    });
+}
+
+/**
+ * TODO Move rx-firebase.js
+ */
+function firebaseSignInWithToken(ref, token) {
+    return Rx.Observable.create(function (observer) {
+        ref.authWithCustomToken(token, function (error, authData) {
+            if (error) {
+                observer.onError(error);
+            } else {
+                observer.onNext(authData);
+                observer.onCompleted();
+            }
+        });
+    });
+}
+
+function firebaseSignInWithPassword(ref, email, password) {
+    return Rx.Observable.create(function (observer) {
+        ref.authWithPassword({
+            email: email,
+            password: password
+        }, function (error, authData) {
+            if (error) {
+                observer.onError(error);
+            } else {
+                observer.onNext(authData);
+                observer.onCompleted();
+            }
+        });
+    });
+}
+
+function firebaseGet(ref) {
+    return Rx.Observable.create(function (observer) {
+        ref.once("value", function (snap) {
+            observer.onNext(snap);
+            observer.onCompleted(snap);
+        });
+    });
+}
 
 client.connect();
