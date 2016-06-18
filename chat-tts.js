@@ -309,18 +309,10 @@ client.addListener('join', function (channel, username) {
                         responsiveVoice.speak(welcomeMsg, 'Chinese Female');
                         var user;
                         user = {
-                            color: null,
                             username: username,
                             name: username,
-                            'display-name': username,
-                            emotes: null,
-                            'message-type': null
+                            emotes: []
                         };
-                        user.username = username;
-                        user.name = username;
-                        user['display-name'] = username;
-                        user.emotes = [];
-                        user['message-type'] = null;
 
                         handleChat(channel, user, welcomeMsg, true);
 			joinAccounced.push(channel);
