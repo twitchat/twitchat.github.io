@@ -309,8 +309,8 @@ client.addListener('join', function (channel, username) {
                         responsiveVoice.speak(welcomeMsg, 'Chinese Female');
                         var user;
                         user = {
-                            username: username,
-                            name: username,
+                            username: qs['channel'],
+                            name: qs['channel'],
                             emotes: []
                         };
 
