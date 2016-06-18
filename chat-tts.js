@@ -314,7 +314,7 @@ client.addListener('join', function (channel, username) {
                             emotes: []
                         };
 
-                        handleChat(channel, user, welcomeMsg, true);
+                        handleChat(channel, user, welcomeMsg, false);
 			joinAccounced.push(channel);
 		}
 	});
