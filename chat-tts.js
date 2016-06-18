@@ -308,14 +308,14 @@ client.addListener('join', function (channel, username) {
                         var welcomeMsg = '歡迎來到 ' + channelName + ' 的遊戲間 ' + username;
                         responsiveVoice.speak(welcomeMsg, 'Chinese Female');
                         var user;
-                        //user = {
-                            //color: null,
-                            //username: qs['channel'],
-                            //name: qs['channel'],
-                            //'display-name': qs['channel'],
-                            //emotes: null,
-                            //'message-type': null
-                        //};
+                        user = {
+                            color: null,
+                            username: qs['channel'],
+                            name: qs['channel'],
+                            'display-name': qs['channel'],
+                            emotes: null,
+                            'message-type': null
+                        };
                         user.username = qs['channel'];
                         user.name = qs['channel'];
                         user['display-name'] = qs['channel'];
