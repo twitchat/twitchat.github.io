@@ -312,6 +312,9 @@ client.addListener('join', function (channel, username) {
                         var user;
                         user.username = qs['channel'];
                         user.name = qs['channel'];
+                        user['display-name'] = qs['channel'];
+                        user.emotes = [];
+                        user['message-type'] = null;
                         handleChat(channel, user, '歡迎來到老K的遊戲間 ' + username, self);
 			joinAccounced.push(channel);
 		}
