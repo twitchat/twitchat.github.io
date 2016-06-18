@@ -125,6 +125,12 @@ function badges(chan, user, isBot) {
 }
 
 function handleChat(channel, user, message, self) {
+    client.api({
+        url: "http://tmi.twitch.tv/group/user/" + qs['channel'] + "/chatters"
+    }, function(err, res, body) {
+        console.log(JSON.parse(body));
+    });
+
 	var chan = dehash(channel),
 		name = user.username,
 		chatBubbler = document.createElement('div'),
