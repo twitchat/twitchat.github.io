@@ -304,6 +304,7 @@ client.addListener('reconnect', function () {
 	});
 client.addListener('join', function (channel, username) {
 		if(joinAccounced.indexOf(channel) == -1) {
+                    if (!username.startsWith('justinfan')) {
 			if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
                         var welcomeMsg = '歡迎來到 ' + alias + ' 的遊戲間 ' + username;
                         responsiveVoice.speak(welcomeMsg, 'Chinese Female');
@@ -316,6 +317,7 @@ client.addListener('join', function (channel, username) {
 
                         handleChat(channel, user, welcomeMsg, true);
 			joinAccounced.push(channel);
+                    }
 		}
 	});
 client.addListener('part', function (channel, username) {
