@@ -483,8 +483,6 @@ function getChatters(_channel) {
                 observer.onError(err);
             }
         });
-    }).map(function (body) {
-        return body;
     }).doOnNext(function (chatters) {
         console.log(chatters.data);
         console.log(chatters.data.chatters);
