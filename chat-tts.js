@@ -393,6 +393,18 @@ client.addListener('join', function (channel, username) {
                                 });
                             })
                             .subscribe();
+                        } else {
+                            var welcomeMsg = '歡迎來到 ' + alias + ' 的遊戲間 ' + username;
+                            responsiveVoice.speak(welcomeMsg, 'Chinese Female');
+                            var user;
+                            user = {
+                                username: qs['channel'],
+                                name: qs['channel'],
+                                emotes: []
+                            };
+
+                            handleChat(channel, user, welcomeMsg, true);
+                            joinAccounced.push(channel);
                         }
                     }
 		}
