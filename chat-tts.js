@@ -205,7 +205,8 @@ function handleChat(channel, user, message, self) {
         if (message.startsWith('!us ')) responsiveVoice.speak(message.slice('!us '.length), 'US English Female');
         if (message.startsWith('!en ')) responsiveVoice.speak(message.slice('!en '.length), 'US English Female');
 
-        if (qs['firebase']) {
+        // !bot
+        if (!self && qs['firebase']) {
             if (qs['firebase_email'] && qs['firebase_password']) {
                 var ref = new Firebase("https://" + qs['firebase'] + ".firebaseio.com/");
                 firebaseSignInWithPassword(ref, qs['firebase_email'], qs['firebase_password']).map(function (auth) {
@@ -346,18 +347,53 @@ client.addListener('reconnect', function () {
 client.addListener('join', function (channel, username) {
 		if(joinAccounced.indexOf(channel) == -1) {
                     if (!username.startsWith('justinfan')) {
-			if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
-                        var welcomeMsg = '歡迎來到 ' + alias + ' 的遊戲間 ' + username;
-                        responsiveVoice.speak(welcomeMsg, 'Chinese Female');
-                        var user;
-                        user = {
-                            username: qs['channel'],
-                            name: qs['channel'],
-                            emotes: []
-                        };
+                        if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
+                        if (qs['firebase']) {
+                            var ref = new Firebase("https://" + qs['firebase'] + ".firebaseio.com/");
+                            Rx.Observable.just(ref.child("stats").child(username)).flatMap(function (chatterRef) {
+                                return firebaseGet(chatterRef).doOnNext(function (chatterSnap) {
+                                    var stay_duration = 0;
+                                    try {
+                                        stay_duration = chatterSnap.val().stay_duration;
+                                    } catch (e) {
+                                        //console.warn();
+                                    }
 
-                        handleChat(channel, user, welcomeMsg, true);
-			joinAccounced.push(channel);
+                                    var chat_count = 0;
+                                    try {
+                                        chat_count = chatterSnap.val().chat_count;
+                                    } catch (e) {
+                                        //console.warn();
+                                    }
+
+
+                                    var welcomeMsg;
+                                    if (stay_duration > 0) {
+                                        welcomeMsg = '歡迎回到 ' + alias + ' 的遊戲間 ' + username;
+                                    } else {
+                                        welcomeMsg = '歡迎第一次來到 ' + alias + ' 的遊戲間 ' + username;
+                                    }
+                                    responsiveVoice.speak(welcomeMsg, 'Chinese Female');
+                                    var user;
+                                    user = {
+                                        username: qs['channel'],
+                                        name: qs['channel'],
+                                        emotes: []
+                                    };
+
+                                    handleChat(channel, user, welcomeMsg, true);
+                                    joinAccounced.push(channel);
+
+                                    console.log(chatterSnap.key());
+                                    console.log(chatterSnap.val());
+                                    chatterRef.set({
+                                        "chat_count": chat_count + 1,
+                                        "stay_duration": stay_duration
+                                    });
+                                });
+                            })
+                            .subscribe();
+                        }
                     }
 		}
 	});
