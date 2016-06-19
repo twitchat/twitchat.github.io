@@ -199,11 +199,11 @@ function handleChat(channel, user, message, self) {
 		for(var i in oldMessages) oldMessages[i].remove();
 	}
 
-        if (message.startsWith('!tw ')) responsiveVoice.speak(message.slice('!tw '.length), 'Chinese Female');
-        if (message.startsWith('!jp ')) responsiveVoice.speak(message.slice('!jp '.length), 'Japanese Female');
-        if (message.startsWith('!kr ')) responsiveVoice.speak(message.slice('!kr '.length), 'Korean Female');
-        if (message.startsWith('!us ')) responsiveVoice.speak(message.slice('!us '.length), 'US English Female');
-        if (message.startsWith('!en ')) responsiveVoice.speak(message.slice('!en '.length), 'US English Female');
+        if (startsWith(message.trim(), '!tw')) responsiveVoice.speak(message.trim().slice('!tw'.length), 'Chinese Female');
+        if (startsWith(message.trim(), '!jp')) responsiveVoice.speak(message.trim().slice('!jp'.length), 'Japanese Female');
+        if (startsWith(message.trim(), '!kr')) responsiveVoice.speak(message.trim().slice('!kr'.length), 'Korean Female');
+        if (startsWith(message.trim(), '!us')) responsiveVoice.speak(message.trim().slice('!us'.length), 'US English Female');
+        if (startsWith(message.trim(), '!en')) responsiveVoice.speak(message.trim().slice('!en'.length), 'US English Female');
 
         // !bot
         if (!self && qs['firebase']) {
@@ -535,6 +535,10 @@ function firebaseGet(ref) {
             observer.onCompleted(snap);
         });
     });
+}
+
+function startsWithIgnoreCase(source, pattern) {
+    return source.substr(0, pattern.length).toLowerCase().startsWith(pattern.toLowerCase);
 }
 
 client.connect();
