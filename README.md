@@ -1,4 +1,4 @@
-# Twitch 聊天彈幕 (chatfall)
+# Twitch 聊天彈幕 (chatfall/marquee)
 
 Twitch 聊天訊息彈幕面板。類似 bilibili, niconico 影音網站的彈幕功能。讓你方便地將彈幕面板即時合成到你的實況影片。
 
