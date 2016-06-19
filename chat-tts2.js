@@ -13,7 +13,7 @@ var qs;
 
     $(document).ready(function(){
       soundManager.setup({
-        url: '/',
+        url: 'https://github.com/hiddentao/google-tts/raw/master/soundmanager2_debug.swf',
         preferFlash: false,
         onready: function() {
           if (!window.GoogleTTS) {
