@@ -11,6 +11,33 @@ var qs;
        qs[decode(match[1])] = decode(match[2]);
 })();
 
+    $(document).ready(function(){
+      soundManager.setup({
+        url: '/',
+        preferFlash: false,
+        onready: function() {
+          if (!window.GoogleTTS) {
+            $("#error").text("Sorry, the google-tts script couldn't be loaded.");
+            return;
+          } else {
+            var HTML = '\
+            <div> \
+                <label for="demo_language">Language:</label> \
+                <select id="demo_language"> \
+                    <option value="" disabled="disabled">(Select language)</option> \
+                </select> \
+            </div> \
+            <div> \
+                <label for="demo_text">Text:</label> \
+                <textarea rows="5" cols="60" id="demo_text" /> \
+            </div> \
+            <button id="demo_play">Play!</button> \
+            ';
+            $("#tts_demo").html(HTML);
+          }
+        }
+      });
+    });
 var tts = new GoogleTTS();
 var langCodes = {
     '!tw': "zh-TW",
