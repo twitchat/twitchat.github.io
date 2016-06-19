@@ -132,6 +132,7 @@ v2：
 
 ~/.firebase/config.json:
 
+```json
 {
     "fffffff": {
         "secret": "fffffffffffffffffffffffffffffffffffffffff",
@@ -143,6 +144,7 @@ v2：
         "url": "https://fffffff.firebaseio.com/"
     }
 }
+```
 
 ## LICENSE
 
