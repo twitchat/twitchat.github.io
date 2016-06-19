@@ -582,7 +582,7 @@ function firebaseGet(ref) {
 }
 
 function startsWithIgnoreCase(source, pattern) {
-    return source.substr(0, pattern.length).toLowerCase().startsWith(pattern.toLowerCase);
+    return source.substr(0, pattern.length).toLowerCase().startsWith(pattern.toLowerCase());
 }
 
 client.connect();

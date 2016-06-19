@@ -11,6 +11,32 @@ var qs;
        qs[decode(match[1])] = decode(match[2]);
 })();
 
+  soundManager.setup({
+    url: 'https://github.com/hiddentao/google-tts/raw/master/soundmanager2_debug.swf',
+    preferFlash: false,
+    onready: function() {
+      if (!window.GoogleTTS) {
+        $("#error").text("Sorry, the google-tts script couldn't be loaded.");
+        return;
+      } else {
+        var HTML = '\
+        <div> \
+            <label for="demo_language">Language:</label> \
+            <select id="demo_language"> \
+                <option value="" disabled="disabled">(Select language)</option> \
+            </select> \
+        </div> \
+        <div> \
+            <label for="demo_text">Text:</label> \
+            <textarea rows="5" cols="60" id="demo_text" /> \
+        </div> \
+        <button id="demo_play">Play!</button> \
+        ';
+        $("#tts_demo").html(HTML);
+      }
+    }
+  });
+
 var channels;
 if ("channel" in qs) {
 channels = [qs['channel']], // Channels to initially join
@@ -199,11 +225,34 @@ function handleChat(channel, user, message, self) {
 		for(var i in oldMessages) oldMessages[i].remove();
 	}
 
-        if (startsWith(message.trim(), '!tw')) responsiveVoice.speak(message.trim().slice('!tw'.length), 'Chinese Female');
-        if (startsWith(message.trim(), '!jp')) responsiveVoice.speak(message.trim().slice('!jp'.length), 'Japanese Female');
-        if (startsWith(message.trim(), '!kr')) responsiveVoice.speak(message.trim().slice('!kr'.length), 'Korean Female');
-        if (startsWith(message.trim(), '!us')) responsiveVoice.speak(message.trim().slice('!us'.length), 'US English Female');
-        if (startsWith(message.trim(), '!en')) responsiveVoice.speak(message.trim().slice('!en'.length), 'US English Female');
+        if (startsWithIgnoreCase(message.trim(), '!tw')) responsiveVoice.speak(message.trim().slice('!tw'.length), 'Chinese Female');
+        if (startsWithIgnoreCase(message.trim(), '!jp')) responsiveVoice.speak(message.trim().slice('!jp'.length), 'Japanese Female');
+        if (startsWithIgnoreCase(message.trim(), '!kr')) responsiveVoice.speak(message.trim().slice('!kr'.length), 'Korean Female');
+        if (startsWithIgnoreCase(message.trim(), '!us')) responsiveVoice.speak(message.trim().slice('!us'.length), 'US English Female');
+        if (startsWithIgnoreCase(message.trim(), '!en')) responsiveVoice.speak(message.trim().slice('!en'.length), 'US English Female');
+        if (startsWithIgnoreCase(message.trim(), '!banzai')) {
+            var soundBravo = soundManager.createSound({
+                url: 'http://taira-komori.jpn.org/sound_os/event01/banzai.mp3',
+                from: 0,
+                to: 5500
+            });
+            soundBravo.play();
+        }
+        if (startsWithIgnoreCase(message.trim(), '!clap')) {
+            var soundBravo = soundManager.createSound({
+                url: 'http://taira-komori.jpn.org/sound_os/event01/clapping_short.mp3'
+            });
+            soundBravo.play();
+        }
+        if (startsWithIgnoreCase(message.trim(), '!bravo')) {
+            var soundBravo = soundManager.createSound({
+                url: 'http://taira-komori.jpn.org/sound_os/event01/clapping_bravo.mp3',
+                from: 0,
+                to: 550
+            });
+            soundBravo.play();
+        }
+
 
         // !bot
         if (!self && qs['firebase']) {
@@ -538,7 +587,7 @@ function firebaseGet(ref) {
 }
 
 function startsWithIgnoreCase(source, pattern) {
-    return source.substr(0, pattern.length).toLowerCase().startsWith(pattern.toLowerCase);
+    return source.substr(0, pattern.length).toLowerCase().startsWith(pattern.toLowerCase());
 }
 
 client.connect();
