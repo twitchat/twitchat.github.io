@@ -213,7 +213,7 @@ function handleChat(channel, user, message, self) {
 
         var langCode = langCodes[message.substr(0, '!..'.length).toLowerCase()];
         if (langCode) {
-            tts.play(message.slice(langCode.length), langCode, function (err) {
+            tts.play(message.slice(langCode.length - 2), langCode, function (err) {
                 console.log(err);
             });
         }
@@ -555,7 +555,7 @@ function firebaseGet(ref) {
 }
 
 function startsWithIgnoreCase(source, pattern) {
-    return source.slice(pattern.length).toLowerCase().startsWith(pattern.toLowerCase);
+    return source.substr(0, pattern.length).toLowerCase().startsWith(pattern.toLowerCase);
 }
 
 client.connect();
