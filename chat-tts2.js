@@ -211,9 +211,9 @@ function handleChat(channel, user, message, self) {
 	}
 
 
-        var langCode = langCodes[message.substr(0, '!..'.length).toLowerCase()];
+        var langCode = langCodes[message.trim().substr(0, '!..'.length).toLowerCase()];
         if (langCode) {
-            tts.play(message.slice(langCode.length - 2), langCode, function (err) {
+            tts.play(message.trim().slice(langCode.length - 2), langCode, function (err) {
                 console.log(err);
             });
         }
