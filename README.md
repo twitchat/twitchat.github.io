@@ -78,7 +78,7 @@ v2：
 * Live: http://twitchat.github.io/notify.html?channel=twitchplayspokemon
 * Demo Video: https://youtu.be/LIRVj18cHwk
 
-彈幕面板 chatfall player:
+彈幕面板 chatfall/marquee player:
 
 ![](art/screenshot-player.png)
 
