@@ -12,7 +12,8 @@ var qs;
 })();
 
   soundManager.setup({
-    url: 'https://github.com/hiddentao/google-tts/raw/master/soundmanager2_debug.swf',
+    //url: 'https://github.com/hiddentao/google-tts/raw/master/soundmanager2_debug.swf',
+    url: 'swf/soundmanager2.swf',
     preferFlash: false,
     onready: function() {
       if (!window.GoogleTTS) {
@@ -226,31 +227,97 @@ function handleChat(channel, user, message, self) {
 	}
 
         if (startsWithIgnoreCase(message.trim(), '!tw')) responsiveVoice.speak(message.trim().slice('!tw'.length), 'Chinese Female');
-        if (startsWithIgnoreCase(message.trim(), '!jp')) responsiveVoice.speak(message.trim().slice('!jp'.length), 'Japanese Female');
-        if (startsWithIgnoreCase(message.trim(), '!kr')) responsiveVoice.speak(message.trim().slice('!kr'.length), 'Korean Female');
-        if (startsWithIgnoreCase(message.trim(), '!us')) responsiveVoice.speak(message.trim().slice('!us'.length), 'US English Female');
-        if (startsWithIgnoreCase(message.trim(), '!en')) responsiveVoice.speak(message.trim().slice('!en'.length), 'US English Female');
-        if (startsWithIgnoreCase(message.trim(), '!banzai')) {
-            var soundBravo = soundManager.createSound({
+        else if (startsWithIgnoreCase(message.trim(), '!jp')) responsiveVoice.speak(message.trim().slice('!jp'.length), 'Japanese Female');
+        else if (startsWithIgnoreCase(message.trim(), '!kr')) responsiveVoice.speak(message.trim().slice('!kr'.length), 'Korean Female');
+        else if (startsWithIgnoreCase(message.trim(), '!us')) responsiveVoice.speak(message.trim().slice('!us'.length), 'US English Female');
+        else if (startsWithIgnoreCase(message.trim(), '!en')) responsiveVoice.speak(message.trim().slice('!en'.length), 'US English Female');
+        else if (startsWithIgnoreCase(message.trim(), '!banzai')) {
+            var sound = soundManager.createSound({
                 url: 'http://taira-komori.jpn.org/sound_os/event01/banzai.mp3',
                 from: 0,
                 to: 5500
             });
-            soundBravo.play();
+            sound.play();
         }
-        if (startsWithIgnoreCase(message.trim(), '!clap')) {
-            var soundBravo = soundManager.createSound({
+        else if (startsWithIgnoreCase(message.trim(), '!2kill')) {
+            var sound = soundManager.createSound({
+                url: 'sound/double_kill.mp3'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!3kill')) {
+            var sound = soundManager.createSound({
+                url: 'sound/triple_kill.mp3'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!4kill')) {
+            var sound = soundManager.createSound({
+                url: 'sound/quadra_kill.mp3'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!5kill')) {
+            var sound = soundManager.createSound({
+                url: 'sound/penta_kill.mp3'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!laugh1')) {
+            var sound = soundManager.createSound({
+                url: 'http://vignette2.wikia.nocookie.net/leagueoflegends/images/d/d0/Teemo.laugh1.ogg'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!laugh2')) {
+            var sound = soundManager.createSound({
+                url: 'http://vignette2.wikia.nocookie.net/leagueoflegends/images/3/33/Teemo.laugh2.ogg'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!laugh3')) {
+            var sound = soundManager.createSound({
+                url: 'http://vignette2.wikia.nocookie.net/leagueoflegends/images/1/10/Teemo.laugh3.ogg'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!clap4')) {
+            var sound = soundManager.createSound({
+                url: 'http://www.sounds.beachware.com/2illionzayp3may/wlvwsnyw/CLAPPNG1.mp3'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!clap3')) {
+            var sound = soundManager.createSound({
+                url: 'http://cd.textfiles.com/999wavs/WAVS_A/APPLAUS2.WAV'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!clap2')) {
+            var sound = soundManager.createSound({
+                url: 'http://www.4uall.net/free-sound-effects/SF-free-sound-effects/CLAPS.WAV'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!clap')) {
+            var sound = soundManager.createSound({
+                url: 'http://maennerseiten.de/klaps.wav'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!claps')) {
+            var sound = soundManager.createSound({
                 url: 'http://taira-komori.jpn.org/sound_os/event01/clapping_short.mp3'
             });
-            soundBravo.play();
+            sound.play();
         }
-        if (startsWithIgnoreCase(message.trim(), '!bravo')) {
-            var soundBravo = soundManager.createSound({
+        else if (startsWithIgnoreCase(message.trim(), '!bravo')) {
+            var sound = soundManager.createSound({
                 url: 'http://taira-komori.jpn.org/sound_os/event01/clapping_bravo.mp3',
                 from: 0,
                 to: 550
             });
-            soundBravo.play();
+            sound.play();
         }
 
 
