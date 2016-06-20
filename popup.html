@@ -1,16 +1,28 @@
 <script type="text/javascript">
+String.prototype.contains = function(it) { return this.indexOf(it) != -1; };
+
 // Popup window code
 function newPopup(url) {
     popupWindow = window.open(
         url,'popUpWindow','height=600,width=1024,resizable=yes,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no')
 }
 function newPopup400(url) {
-    popupWindow = window.open(
-        url,'popUpWindow','height=600,width=400,resizable=yes,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no')
+    if (url.contains('?') && queries) {
+        popupWindow = window.open(
+                url + '&' + queries,'popUpWindow','height=600,width=400,resizable=yes,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no')
+    } else if (queries) {
+        popupWindow = window.open(
+                url + '?' + queries,'popUpWindow','height=600,width=400,resizable=yes,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no')
+    }
 }
 function newPopup600(url) {
-    popupWindow = window.open(
-        url,'popUpWindow','height=600,width=600,resizable=yes,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no')
+    if (url.contains('?') && queries) {
+        popupWindow = window.open(
+                url + '&' + queries,'popUpWindow','height=600,width=600,resizable=yes,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no')
+    } else if (queries) {
+        popupWindow = window.open(
+                url + '?' + queries,'popUpWindow','height=600,width=600,resizable=yes,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no')
+    }
 }
 
 //function newWindow400(url) {
@@ -21,6 +33,22 @@ function newPopup600(url) {
 //    popupWindow = window.open(
 //        url, "_blank",'height=600,width=600,resizable=yes,scrollbars=no,toolbar=no,menubar=no,location=no,directories=yes,status=yes')
 //}
+
+var qs;
+var queries;
+(window.onpopstate = function () {
+    var match,
+        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+        query  = window.location.search.substring(1);
+
+    qs = {};
+    while (match = search.exec(query))
+       qs[decode(match[1])] = decode(match[2]);
+
+    queries = window.location.search.substring(1);
+})();
 </script>
 <p><a href="JavaScript:newPopup('/');">彈幕/suptitle</a></p>
 <p><a href="JavaScript:newPopup('chat.html');">chat</a></p>
@@ -31,9 +59,7 @@ function newPopup600(url) {
 <p><a href="JavaScript:newPopup('mistakelolz-player.html');">mistakelolz-player</a></p>
 <p><a href="JavaScript:newPopup('twitchplayspokemon-player.html');">twitchplayspokemon-player</a></p>
 <p><a href="JavaScript:newPopup('e4e2e7343-player.html');">e4e2e7343-player.html</a></p>
+<p><a href="JavaScript:newPopup400('chat.html');">chat w400</a></p>
+<p><a href="JavaScript:newPopup600('chat.html');">chat w600</a></p>
 <p><a href="JavaScript:newPopup400('chat-tts.html');">chat-tts w400</a></p>
 <p><a href="JavaScript:newPopup600('chat-tts.html');">chat-tts w600</a></p>
-<p><a href="JavaScript:newPopup400('chat.html?channel=e4e2e7343&alias=%E8%80%81K&firebase=twitch8');">e4e2e7343 chat w400</a></p>
-<p><a href="JavaScript:newPopup600('chat.html?channel=e4e2e7343&alias=%E8%80%81K&firebase=twitch8');">e4e2e7343 chat w600</a></p>
-<p><a href="JavaScript:newPopup400('chat-tts.html?channel=e4e2e7343&alias=%E8%80%81K&firebase=twitch8');">e4e2e7343 chat-tts w400</a></p>
-<p><a href="JavaScript:newPopup600('chat-tts.html?channel=e4e2e7343&alias=%E8%80%81K&firebase=twitch8');">e4e2e7343 chat-tts w600</a></p>
