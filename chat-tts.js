@@ -171,8 +171,6 @@ function badges(chan, user, isBot) {
 	return chatBadges;
 }
 
-var sounds = [];
-
 function handleChat(channel, user, message, self) {
 	var chan = dehash(channel),
 		name = user.username,
