@@ -284,6 +284,10 @@ function handleChat(channel, user, message, self) {
         else if (startsWithIgnoreCase(message.trim(), '!5kill')) {
             playSound('sound/penta_kill.mp3');
         }
+        else if (startsWithIgnoreCase(message.trim(), '!godlike')) {
+            //soundManager.createSound({ url: 'http://vignette2.wikia.nocookie.net/leagueoflegends/images/e/e9/Female1_OnKillingSpreeSet5You1.ogg'}).play();
+            playSound({ url: 'http://vignette2.wikia.nocookie.net/leagueoflegends/images/e/e9/Female1_OnKillingSpreeSet5You1.ogg'}).play();
+        }
         else if (startsWithIgnoreCase(message.trim(), '!laugh1')) {
             playSound('http://vignette2.wikia.nocookie.net/leagueoflegends/images/d/d0/Teemo.laugh1.ogg');
         }
