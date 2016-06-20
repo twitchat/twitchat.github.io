@@ -335,15 +335,15 @@ function handleChat(channel, user, message, self) {
             });
             sound.play();
         }
-        else if (startsWithIgnoreCase(message.trim(), '!clap')) {
-            var sound = soundManager.createSound({
-                url: 'http://maennerseiten.de/klaps.wav'
-            });
-            sound.play();
-        }
         else if (startsWithIgnoreCase(message.trim(), '!claps')) {
             var sound = soundManager.createSound({
                 url: 'http://taira-komori.jpn.org/sound_os/event01/clapping_short.mp3'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!clap')) {
+            var sound = soundManager.createSound({
+                url: 'http://maennerseiten.de/klaps.wav'
             });
             sound.play();
         }
