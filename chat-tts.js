@@ -460,6 +460,7 @@ client.addListener('reconnect', function () {
 client.addListener('join', function (channel, username) {
                     console.log('!startsWith: ' + username + ': ' + (!username.startsWith('justinfan')));
                     console.log('contains: ' + username + ': ' + contains(user, joinAccouncedUsers));
+                    console.log('joinAccouncedUsers: ' + joinAccouncedUsers);
                     console.log('!startsWith && !contains: ' + username + ': ' + (!username.startsWith('justinfan') && !contains(username, joinAccouncedUsers)));
 
                     if (!username.startsWith('justinfan')) {
@@ -467,65 +468,65 @@ client.addListener('join', function (channel, username) {
                             console.log('!contains{: ' + username + ': ' + !contains(user, joinAccouncedUsers));
                             put(username, joinAccouncedUsers);
                             console.log('!contains}: ' + username + ': ' + !contains(user, joinAccouncedUsers));
-                        if (showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
-                        if (qs['firebase']) {
-                            console.log("welcomeMsg: ");
-                            var ref = new Firebase("https://" + qs['firebase'] + ".firebaseio.com/");
-                            Rx.Observable.just(ref.child("stats").child(username)).flatMap(function (chatterRef) {
-                                return firebaseGet(chatterRef).doOnNext(function (chatterSnap) {
-                                    var stay_duration = 0;
-                                    try {
-                                        stay_duration = chatterSnap.val().stay_duration;
-                                    } catch (e) {
-                                        //console.warn();
-                                    }
+                            if (showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
+                            if (qs['firebase']) {
+                                console.log("welcomeMsg: ");
+                                var ref = new Firebase("https://" + qs['firebase'] + ".firebaseio.com/");
+                                Rx.Observable.just(ref.child("stats").child(username)).flatMap(function (chatterRef) {
+                                    return firebaseGet(chatterRef).doOnNext(function (chatterSnap) {
+                                        var stay_duration = 0;
+                                        try {
+                                            stay_duration = chatterSnap.val().stay_duration;
+                                        } catch (e) {
+                                            //console.warn();
+                                        }
 
-                                    var chat_count = 0;
-                                    try {
-                                        chat_count = chatterSnap.val().chat_count;
-                                    } catch (e) {
-                                        //console.warn();
-                                    }
+                                        var chat_count = 0;
+                                        try {
+                                            chat_count = chatterSnap.val().chat_count;
+                                        } catch (e) {
+                                            //console.warn();
+                                        }
 
 
-                                    var welcomeMsg;
-                                    if (stay_duration > 0) {
-                                        welcomeMsg = '歡迎再次來到 ' + alias + ' 的遊戲間 ' + username;
-                                    } else {
-                                        welcomeMsg = '歡迎第一次來到 ' + alias + ' 的遊戲間 ' + username;
-                                    }
-                                    responsiveVoice.speak(welcomeMsg, 'Chinese Female');
-                                    var user;
-                                    user = {
-                                        username: qs['channel'],
-                                        name: qs['channel'],
-                                        emotes: []
-                                    };
+                                        var welcomeMsg;
+                                        if (stay_duration > 0) {
+                                            welcomeMsg = '歡迎再次來到 ' + alias + ' 的遊戲間 ' + username;
+                                        } else {
+                                            welcomeMsg = '歡迎第一次來到 ' + alias + ' 的遊戲間 ' + username;
+                                        }
+                                        responsiveVoice.speak(welcomeMsg, 'Chinese Female');
+                                        var user;
+                                        user = {
+                                            username: qs['channel'],
+                                            name: qs['channel'],
+                                            emotes: []
+                                        };
 
-                                    handleChat(channel, user, welcomeMsg, true);
+                                        handleChat(channel, user, welcomeMsg, true);
 
-                                    console.log(chatterSnap.key());
-                                    console.log(chatterSnap.val());
-                                    chatterRef.set({
-                                        "chat_count": chat_count + 1,
-                                        "stay_duration": stay_duration
+                                        console.log(chatterSnap.key());
+                                        console.log(chatterSnap.val());
+                                        chatterRef.set({
+                                            "chat_count": chat_count + 1,
+                                            "stay_duration": stay_duration
+                                        });
                                     });
-                                });
-                            })
-                            .subscribe();
-                        } else {
-                            var welcomeMsg = '歡迎來到 ' + alias + ' 的遊戲間 ' + username;
-                            responsiveVoice.speak(welcomeMsg, 'Chinese Female');
-                            var user;
-                            user = {
-                                username: qs['channel'],
-                                name: qs['channel'],
-                                emotes: []
-                            };
+                                })
+                                .subscribe();
+                            } else {
+                                var welcomeMsg = '歡迎來到 ' + alias + ' 的遊戲間 ' + username;
+                                responsiveVoice.speak(welcomeMsg, 'Chinese Female');
+                                var user;
+                                user = {
+                                    username: qs['channel'],
+                                    name: qs['channel'],
+                                    emotes: []
+                                };
 
-                            handleChat(channel, user, welcomeMsg, true);
+                                handleChat(channel, user, welcomeMsg, true);
+                            }
                         }
-                    }
                     }
 
                     put(channel, joinAccounced);
