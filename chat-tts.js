@@ -39,22 +39,22 @@ var qs;
   });
 
 if(typeof soundManager !== 'undefined') {
-    soundManager.fadeTo = function(id, dur, toVol, callback){
+    soundManager.fadeTo = function (id, dur, toVol, callback) {
         dur      = dur || 1000;
         toVol    = toVol || 0;
-        callback = typeof callback == 'function' ? callback : function(){};
+        callback = typeof callback == 'function' ? callback : function () {};
         var s    = soundManager.getSoundById(id),
-        k    = s.volume,
-            t    = dur/Math.abs(k - toVol),
-            i    = setInterval(function(){
-                k = k > toVol ? k - 1 : k + 1;
-                s.setVolume(k);
-                if(k == toVol){ 
-                    callback.call(this);
-                    clearInterval(i);
-                    i = null;
-                }
-            }, t);	
+        k = s.volume,
+        t = dur/Math.abs(k - toVol),
+        i = setInterval(function () {
+            k = k > toVol ? k - 1 : k + 1;
+            s.setVolume(k);
+            if (k == toVol) {
+                callback.call(this);
+                clearInterval(i);
+                i = null;
+            }
+        }, t);
     }
 }
 
