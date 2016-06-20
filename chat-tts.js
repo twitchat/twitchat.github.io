@@ -171,6 +171,8 @@ function badges(chan, user, isBot) {
 	return chatBadges;
 }
 
+var sounds = [];
+
 function handleChat(channel, user, message, self) {
 	var chan = dehash(channel),
 		name = user.username,
@@ -252,130 +254,64 @@ function handleChat(channel, user, message, self) {
         else if (startsWithIgnoreCase(message.trim(), '!us')) responsiveVoice.speak(message.trim().slice('!us'.length), 'US English Female');
         else if (startsWithIgnoreCase(message.trim(), '!en')) responsiveVoice.speak(message.trim().slice('!en'.length), 'US English Female');
         else if (startsWithIgnoreCase(message.trim(), '!banzai')) {
-            var sound = soundManager.createSound({
-                url: 'http://taira-komori.jpn.org/sound_os/event01/banzai.mp3',
-                from: 0,
-                to: 5500
-            });
-            sound.play();
+            playSoundFadeOut('http://taira-komori.jpn.org/sound_os/event01/banzai.mp3', 5500);
         }
         else if (startsWithIgnoreCase(message.trim(), '!spawn')) {
-            var sound = soundManager.createSound({
-                url: 'http://vignette3.wikia.nocookie.net/leagueoflegends/images/c/cf/Female1_OnMinionsSpawn_1.ogg'
-            });
-            sound.play();
+            playSound('http://vignette3.wikia.nocookie.net/leagueoflegends/images/c/cf/Female1_OnMinionsSpawn_1.ogg');
         }
         else if (startsWithIgnoreCase(message.trim(), '!executed')) {
-            var sound = soundManager.createSound({
-                url: 'http://vignette3.wikia.nocookie.net/leagueoflegends/images/3/37/Female1_OnChampionKillTurretH.ogg'
-            });
-            sound.play();
+            playSound('http://vignette3.wikia.nocookie.net/leagueoflegends/images/3/37/Female1_OnChampionKillTurretH.ogg');
         }
         else if (startsWithIgnoreCase(message.trim(), '!1blood')) {
-            var sound = soundManager.createSound({
-                url: 'http://vignette1.wikia.nocookie.net/leagueoflegends/images/4/4c/Female1_OnFirstBlood_1.ogg'
-            });
-            sound.play();
+            playSound('http://vignette1.wikia.nocookie.net/leagueoflegends/images/4/4c/Female1_OnFirstBlood_1.ogg');
         }
         else if (startsWithIgnoreCase(message.trim(), '!aced')) {
-            var sound = soundManager.createSound({
-                url: 'http://vignette3.wikia.nocookie.net/leagueoflegends/images/8/89/Female1_OnAce_1.ogg'
-            });
-            sound.play();
+            playSound('http://vignette3.wikia.nocookie.net/leagueoflegends/images/8/89/Female1_OnAce_1.ogg');
         }
         else if (startsWithIgnoreCase(message.trim(), '!unstop')) {
-            var sound = soundManager.createSound({
-                url: 'http://vignette4.wikia.nocookie.net/leagueoflegends/images/5/56/Female1_OnKillingSpreeSet3You.ogg'
-            });
-            sound.play();
+            playSound('http://vignette4.wikia.nocookie.net/leagueoflegends/images/5/56/Female1_OnKillingSpreeSet3You.ogg');
         }
         else if (startsWithIgnoreCase(message.trim(), '!legendary')) {
-            var sound = soundManager.createSound({
-                url: 'http://vignette4.wikia.nocookie.net/leagueoflegends/images/8/8c/Female1_OnKillingSpreeSet6You1.ogg'
-            });
-            sound.play();
+            playSound('http://vignette4.wikia.nocookie.net/leagueoflegends/images/8/8c/Female1_OnKillingSpreeSet6You1.ogg');
         }
         else if (startsWithIgnoreCase(message.trim(), '!2kill')) {
-            var sound = soundManager.createSound({
-                url: 'sound/double_kill.mp3'
-            });
-            sound.play();
+            playSound('sound/double_kill.mp3');
         }
         else if (startsWithIgnoreCase(message.trim(), '!3kill')) {
-            var sound = soundManager.createSound({
-                url: 'sound/triple_kill.mp3'
-            });
-            sound.play();
+            playSound('sound/triple_kill.mp3');
         }
         else if (startsWithIgnoreCase(message.trim(), '!4kill')) {
-            var sound = soundManager.createSound({
-                url: 'sound/quadra_kill.mp3'
-            });
-            sound.play();
+            playSound('sound/quadra_kill.mp3');
         }
         else if (startsWithIgnoreCase(message.trim(), '!5kill')) {
-            var sound = soundManager.createSound({
-                url: 'sound/penta_kill.mp3'
-            });
-            sound.play();
+            playSound('sound/penta_kill.mp3');
         }
         else if (startsWithIgnoreCase(message.trim(), '!laugh1')) {
-            var sound = soundManager.createSound({
-                url: 'http://vignette2.wikia.nocookie.net/leagueoflegends/images/d/d0/Teemo.laugh1.ogg'
-            });
-            sound.play();
+            playSound('http://vignette2.wikia.nocookie.net/leagueoflegends/images/d/d0/Teemo.laugh1.ogg');
         }
         else if (startsWithIgnoreCase(message.trim(), '!laugh2')) {
-            var sound = soundManager.createSound({
-                url: 'http://vignette2.wikia.nocookie.net/leagueoflegends/images/3/33/Teemo.laugh2.ogg'
-            });
-            sound.play();
+            playSound('http://vignette2.wikia.nocookie.net/leagueoflegends/images/3/33/Teemo.laugh2.ogg');
         }
         else if (startsWithIgnoreCase(message.trim(), '!laugh3')) {
-            var sound = soundManager.createSound({
-                url: 'http://vignette2.wikia.nocookie.net/leagueoflegends/images/1/10/Teemo.laugh3.ogg'
-            });
-            sound.play();
+            playSound('http://vignette2.wikia.nocookie.net/leagueoflegends/images/1/10/Teemo.laugh3.ogg');
         }
         else if (startsWithIgnoreCase(message.trim(), '!clap4')) {
-            var sound = soundManager.createSound({
-                url: 'http://www.sounds.beachware.com/2illionzayp3may/wlvwsnyw/CLAPPNG1.mp3'
-            });
-            sound.play();
+            playSound('http://www.sounds.beachware.com/2illionzayp3may/wlvwsnyw/CLAPPNG1.mp3');
         }
         else if (startsWithIgnoreCase(message.trim(), '!clap3')) {
-            var sound = soundManager.createSound({
-                url: 'http://cd.textfiles.com/999wavs/WAVS_A/APPLAUS2.WAV'
-            });
-            sound.play();
+            playSound('http://cd.textfiles.com/999wavs/WAVS_A/APPLAUS2.WAV');
         }
         else if (startsWithIgnoreCase(message.trim(), '!clap2')) {
-            var sound = soundManager.createSound({
-                url: 'http://www.4uall.net/free-sound-effects/SF-free-sound-effects/CLAPS.WAV'
-            });
-            sound.play();
+            playSound('http://www.4uall.net/free-sound-effects/SF-free-sound-effects/CLAPS.WAV');
         }
         else if (startsWithIgnoreCase(message.trim(), '!claps')) {
-            var sound = soundManager.createSound({
-                url: 'http://taira-komori.jpn.org/sound_os/event01/clapping_short.mp3'
-            });
-            sound.play();
+            playSound('http://taira-komori.jpn.org/sound_os/event01/clapping_short.mp3');
         }
         else if (startsWithIgnoreCase(message.trim(), '!clap')) {
-            var sound = soundManager.createSound({
-                url: 'http://maennerseiten.de/klaps.wav'
-            });
-            sound.play();
+            playSound('http://maennerseiten.de/klaps.wav');
         }
         else if (startsWithIgnoreCase(message.trim(), '!bravo')) {
-            var sound = soundManager.createSound({
-                id: 'bravo',
-                url: 'http://taira-komori.jpn.org/sound_os/event01/clapping_bravo.mp3',
-                from: 0,
-                to: 5000
-            });
-            soundManager.fadeTo('bravo', 5000);
-            sound.play();
+            playSoundFadeOut('http://taira-komori.jpn.org/sound_os/event01/clapping_bravo.mp3', 5000);
         }
 
 
@@ -718,6 +654,39 @@ function firebaseGet(ref) {
 
 function startsWithIgnoreCase(source, pattern) {
     return source.substr(0, pattern.length).toLowerCase().startsWith(pattern.toLowerCase());
+}
+
+function playSound(url) {
+    var sound = soundManager.getSoundById(url);
+    if (!sound) {
+        sound = soundManager.createSound({
+            id: url,
+            url: url
+        });
+    }
+    sound.play();
+}
+
+/**
+ * Allow mixed sounds
+ */
+function playSounds(url) {
+    sound = soundManager.createSound({
+        url: url
+    });
+    sound.play();
+}
+
+function playSoundFadeOut(url, duration) {
+    var id = Math.random().toString();
+    sound = soundManager.createSound({
+        id: id,
+        url: url,
+        from: 0,
+        to: duration
+    });
+    soundManager.fadeTo(id, duration);
+    sound.play();
 }
 
 client.connect();
