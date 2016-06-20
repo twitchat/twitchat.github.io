@@ -260,7 +260,7 @@ function handleChat(channel, user, message, self) {
         else if (startsWithIgnoreCase(message.trim(), '!executed')) {
             playSound('http://vignette3.wikia.nocookie.net/leagueoflegends/images/3/37/Female1_OnChampionKillTurretH.ogg');
         }
-        else if (startsWithIgnoreCase(message.trim(), '!1blood')) {
+        else if (startsWithIgnoreCase(message.trim(), '!1blood') || startsWithIgnoreCase(message.trim(), '!firstblood')) {
             playSound('http://vignette1.wikia.nocookie.net/leagueoflegends/images/4/4c/Female1_OnFirstBlood_1.ogg');
         }
         else if (startsWithIgnoreCase(message.trim(), '!aced')) {
