@@ -309,6 +309,7 @@ client.addListener('hosting', hosting);
 client.addListener('unhost', function(channel, viewers) { hosting(channel, null, viewers, true) });
 
 var joinAccounced = [];
+var joinAccouncedUsers = [];
 
 //client.on("chat", function (channel, user, message, self) {
 //});
@@ -336,20 +337,35 @@ client.addListener('reconnect', function () {
 	});
 client.addListener('join', function (channel, username) {
 		if(joinAccounced.indexOf(channel) == -1) {
-			if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
 			joinAccounced.push(channel);
+                        //if(showConnectionNotices) chatNotice(capitalize('Joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
 		}
+                put(username, joinAccouncedUsers);
+                if (!username.startsWith('justinfan') && !contains(joinAccouncedUsers)) {
+                    if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
+                }
 	});
 client.addListener('part', function (channel, username) {
 		var index = joinAccounced.indexOf(channel);
 		if(index > -1) {
 			joinAccounced.splice(joinAccounced.indexOf(channel), 1)
 		}
+                //if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' parted ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
 	});
 
 client.addListener('crash', function () {
 		chatNotice('Crashed', 10000, 4, 'chat-crash');
 	});
+
+function contains(item, arr) {
+    return !~arr.indexOf(item);
+}
+
+function put(item, arr) {
+    if (contains(item, arr)) {
+        arr.push(item);
+    }
+}
 
 client.connect();
 });

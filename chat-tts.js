@@ -458,7 +458,10 @@ client.addListener('reconnect', function () {
 		if(showConnectionNotices) chatNotice('Reconnected', 1000, 'chat-connection-good-reconnect');
 	});
 client.addListener('join', function (channel, username) {
-                    if (!username.startsWith('justinfan') && !~joinAccouncedUsers.indexOf(username)) {
+                    put(channel, joinAccounced);
+                    put(username, joinAccouncedUsers);
+
+                    if (!username.startsWith('justinfan') && !contains(joinAccouncedUsers)) {
                         if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
                         if (qs['firebase']) {
                             var ref = new Firebase("https://" + qs['firebase'] + ".firebaseio.com/");
@@ -516,24 +519,26 @@ client.addListener('join', function (channel, username) {
 
                             handleChat(channel, user, welcomeMsg, true);
                         }
-
-                        put(username, joinAccouncedUsers);
                     }
 	});
 client.addListener('part', function (channel, username) {
 		var index = joinAccounced.indexOf(channel);
 		if(index > -1) {
-			if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' parted ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-part');
 			joinAccounced.splice(joinAccounced.indexOf(channel), 1)
 		}
+                if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' parted ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-part');
 	});
 
 client.addListener('crash', function () {
 		chatNotice('Crashed', 10000, 4, 'chat-crash');
 	});
 
+function contains(item, arr) {
+    return !~arr.indexOf(item);
+}
+
 function put(item, arr) {
-    if (!~arr.indexOf(item)) {
+    if (contains(item, arr)) {
         arr.push(item);
     }
 }
