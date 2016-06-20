@@ -239,6 +239,42 @@ function handleChat(channel, user, message, self) {
             });
             sound.play();
         }
+        else if (startsWithIgnoreCase(message.trim(), '!spawn')) {
+            var sound = soundManager.createSound({
+                url: 'http://vignette3.wikia.nocookie.net/leagueoflegends/images/c/cf/Female1_OnMinionsSpawn_1.ogg'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!executed')) {
+            var sound = soundManager.createSound({
+                url: 'http://vignette3.wikia.nocookie.net/leagueoflegends/images/3/37/Female1_OnChampionKillTurretH.ogg'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!1boold')) {
+            var sound = soundManager.createSound({
+                url: 'http://vignette1.wikia.nocookie.net/leagueoflegends/images/4/4c/Female1_OnFirstBlood_1.ogg'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!aced')) {
+            var sound = soundManager.createSound({
+                url: 'http://vignette3.wikia.nocookie.net/leagueoflegends/images/8/89/Female1_OnAce_1.ogg'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!unstop')) {
+            var sound = soundManager.createSound({
+                url: 'http://vignette4.wikia.nocookie.net/leagueoflegends/images/5/56/Female1_OnKillingSpreeSet3You.ogg'
+            });
+            sound.play();
+        }
+        else if (startsWithIgnoreCase(message.trim(), '!legendary')) {
+            var sound = soundManager.createSound({
+                url: 'http://vignette4.wikia.nocookie.net/leagueoflegends/images/8/8c/Female1_OnKillingSpreeSet6You1.ogg'
+            });
+            sound.play();
+        }
         else if (startsWithIgnoreCase(message.trim(), '!2kill')) {
             var sound = soundManager.createSound({
                 url: 'sound/double_kill.mp3'
