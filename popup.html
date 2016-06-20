@@ -3,8 +3,13 @@ String.prototype.contains = function(it) { return this.indexOf(it) != -1; };
 
 // Popup window code
 function newPopup(url) {
-    popupWindow = window.open(
-        url,'popUpWindow','height=600,width=1024,resizable=yes,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no')
+    if (url.contains('?') && queries) {
+        popupWindow = window.open(
+                url + '&' + queries,'popUpWindow','height=600,width=1024,resizable=yes,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no')
+    } else if (queries) {
+        popupWindow = window.open(
+                url + '?' + queries,'popUpWindow','height=600,width=1024,resizable=yes,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no,status=no')
+    }
 }
 function newPopup400(url) {
     if (url.contains('?') && queries) {
@@ -50,7 +55,7 @@ var queries;
     queries = window.location.search.substring(1);
 })();
 </script>
-<p><a href="JavaScript:newPopup('/');">彈幕/suptitle</a></p>
+<p><a href="JavaScript:newPopup('/');">彈幕 marquee</a></p>
 <p><a href="JavaScript:newPopup('chat.html');">chat</a></p>
 <p><a href="JavaScript:newPopup('notify.html');">notify</a></p>
 <p><a href="JavaScript:newPopup('/?channel=mistakelolz');">garenatw</a></p>
