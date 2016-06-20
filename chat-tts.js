@@ -272,16 +272,16 @@ function handleChat(channel, user, message, self) {
         else if (startsWithIgnoreCase(message.trim(), '!legendary')) {
             playSound('http://vignette4.wikia.nocookie.net/leagueoflegends/images/8/8c/Female1_OnKillingSpreeSet6You1.ogg');
         }
-        else if (startsWithIgnoreCase(message.trim(), '!2kill')) {
+        else if (startsWithIgnoreCase(message.trim(), '!2kill') || startsWithIgnoreCase(message.trim(), '!doublekill')) {
             playSound('sound/double_kill.mp3');
         }
-        else if (startsWithIgnoreCase(message.trim(), '!3kill')) {
+        else if (startsWithIgnoreCase(message.trim(), '!3kill') || startsWithIgnoreCase(message.trim(), '!triplekill')) {
             playSound('sound/triple_kill.mp3');
         }
-        else if (startsWithIgnoreCase(message.trim(), '!4kill')) {
+        else if (startsWithIgnoreCase(message.trim(), '!4kill') || startsWithIgnoreCase(message.trim(), '!quadrakill')) {
             playSound('sound/quadra_kill.mp3');
         }
-        else if (startsWithIgnoreCase(message.trim(), '!5kill')) {
+        else if (startsWithIgnoreCase(message.trim(), '!5kill') || startsWithIgnoreCase(message.trim(), '!pentakill') || startsWithIgnoreCase(message.trim(), '!penta')) {
             playSound('sound/penta_kill.mp3');
         }
         else if (startsWithIgnoreCase(message.trim(), '!godlike')) {
