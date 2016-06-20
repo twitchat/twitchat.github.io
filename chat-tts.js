@@ -251,7 +251,7 @@ function handleChat(channel, user, message, self) {
             });
             sound.play();
         }
-        else if (startsWithIgnoreCase(message.trim(), '!1boold')) {
+        else if (startsWithIgnoreCase(message.trim(), '!1blood')) {
             var sound = soundManager.createSound({
                 url: 'http://vignette1.wikia.nocookie.net/leagueoflegends/images/4/4c/Female1_OnFirstBlood_1.ogg'
             });
