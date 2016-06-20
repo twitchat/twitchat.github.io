@@ -457,10 +457,26 @@ client.addListener('disconnected', function (reason) {
 client.addListener('reconnect', function () {
 		if(showConnectionNotices) chatNotice('Reconnected', 1000, 'chat-connection-good-reconnect');
 	});
-client.addListener('join', function (channel, username) {
-                    put(channel, joinAccounced);
-                    put(username, joinAccouncedUsers);
+client.addListener('part', function (channel, username) {
+		var index = joinAccounced.indexOf(channel);
+		if(index > -1) {
+			joinAccounced.splice(joinAccounced.indexOf(channel), 1)
+		}
+                if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' parted ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-part');
+	});
 
+client.addListener('crash', function () {
+		chatNotice('Crashed', 10000, 4, 'chat-crash');
+	});
+
+getChatters(qs['channel']).subscribe(function (chatter) {
+    console.log('add: ' + chatter + ' to ' + joinAccouncedUsers);
+    put(chatter, joinAccouncedUsers);
+}, function (e) {}, function () {
+    client.addListener('join', function (channel, username) {
+                    console.log('user: ' + username);
+                    console.log('joinUsers: ' + joinAccouncedUsers);
+                    console.log('hasContains? ' + contains(user, joinAccouncedUsers));
                     if (!username.startsWith('justinfan') && !contains(username, joinAccouncedUsers)) {
                         if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
                         if (qs['firebase']) {
@@ -520,18 +536,11 @@ client.addListener('join', function (channel, username) {
                             handleChat(channel, user, welcomeMsg, true);
                         }
                     }
-	});
-client.addListener('part', function (channel, username) {
-		var index = joinAccounced.indexOf(channel);
-		if(index > -1) {
-			joinAccounced.splice(joinAccounced.indexOf(channel), 1)
-		}
-                if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' parted ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-part');
-	});
 
-client.addListener('crash', function () {
-		chatNotice('Crashed', 10000, 4, 'chat-crash');
+                    put(channel, joinAccounced);
+                    put(username, joinAccouncedUsers);
 	});
+});
 
 function contains(item, arr) {
     return !~arr.indexOf(item);
