@@ -458,12 +458,20 @@ client.addListener('reconnect', function () {
 		if(showConnectionNotices) chatNotice('Reconnected', 1000, 'chat-connection-good-reconnect');
 	});
 client.addListener('join', function (channel, username) {
-                    console.log('user: ' + username);
-                    console.log('joinUsers: ' + joinAccouncedUsers);
-                    console.log('hasContains? ' + contains(user, joinAccouncedUsers));
+                    console.log('!startsWith: ' + username + ': ' + (!username.startsWith('justinfan')));
+                    console.log('contains: ' + username + ': ' + contains(user, joinAccouncedUsers));
+                    console.log('!startsWith && !contains: ' + username + ': ' + (!username.startsWith('justinfan') && !contains(username, joinAccouncedUsers)));
+
                     if (!username.startsWith('justinfan') && !contains(username, joinAccouncedUsers)) {
-                        if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
+                        if (!contains(username, joinAccouncedUsers)) {
+                            console.log('!contains{: ' + username + ': ' + !contains(user, joinAccouncedUsers));
+                            put(username, joinAccouncedUsers);
+                            console.log('!contains}: ' + username + ': ' + !contains(user, joinAccouncedUsers));
+                            return;
+                        }
+                        if (showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
                         if (qs['firebase']) {
+                            console.log("welcomeMsg: ");
                             var ref = new Firebase("https://" + qs['firebase'] + ".firebaseio.com/");
                             Rx.Observable.just(ref.child("stats").child(username)).flatMap(function (chatterRef) {
                                 return firebaseGet(chatterRef).doOnNext(function (chatterSnap) {
@@ -561,7 +569,7 @@ if (qs['firebase']) {
     if (qs['firebase_email'] && qs['firebase_password']) {
         var ref = new Firebase("https://" + qs['firebase'] + ".firebaseio.com/");
         firebaseSignInWithPassword(ref, qs['firebase_email'], qs['firebase_password']).flatMap(function (auth) {
-            return Rx.Observable.interval(15 * SECONDS).timeInterval();
+            return Rx.Observable.interval(1 * MINITES).timeInterval();
         }).flatMap(function (i) {
             return getChatters(qs['channel']);
         }).map(function (chatter) {
