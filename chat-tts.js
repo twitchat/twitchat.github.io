@@ -462,13 +462,11 @@ client.addListener('join', function (channel, username) {
                     console.log('contains: ' + username + ': ' + contains(user, joinAccouncedUsers));
                     console.log('!startsWith && !contains: ' + username + ': ' + (!username.startsWith('justinfan') && !contains(username, joinAccouncedUsers)));
 
-                    if (!username.startsWith('justinfan') && !contains(username, joinAccouncedUsers)) {
+                    if (!username.startsWith('justinfan')) {
                         if (!contains(username, joinAccouncedUsers)) {
                             console.log('!contains{: ' + username + ': ' + !contains(user, joinAccouncedUsers));
                             put(username, joinAccouncedUsers);
                             console.log('!contains}: ' + username + ': ' + !contains(user, joinAccouncedUsers));
-                            return;
-                        }
                         if (showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
                         if (qs['firebase']) {
                             console.log("welcomeMsg: ");
@@ -527,6 +525,7 @@ client.addListener('join', function (channel, username) {
 
                             handleChat(channel, user, welcomeMsg, true);
                         }
+                    }
                     }
 
                     put(channel, joinAccounced);
