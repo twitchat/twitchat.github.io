@@ -38,6 +38,26 @@ var qs;
     }
   });
 
+if(typeof soundManager !== 'undefined') {
+    soundManager.fadeTo = function(id, dur, toVol, callback){
+        dur      = dur || 1000;
+        toVol    = toVol || 0;
+        callback = typeof callback == 'function' ? callback : function(){};
+        var s    = soundManager.getSoundById(id),
+        k    = s.volume,
+            t    = dur/Math.abs(k - toVol),
+            i    = setInterval(function(){
+                k = k > toVol ? k - 1 : k + 1;
+                s.setVolume(k);
+                if(k == toVol){ 
+                    callback.call(this);
+                    clearInterval(i);
+                    i = null;
+                }
+            }, t);	
+    }
+}
+
 var channels;
 if ("channel" in qs) {
 channels = [qs['channel']], // Channels to initially join
@@ -349,10 +369,12 @@ function handleChat(channel, user, message, self) {
         }
         else if (startsWithIgnoreCase(message.trim(), '!bravo')) {
             var sound = soundManager.createSound({
+                id: 'bravo',
                 url: 'http://taira-komori.jpn.org/sound_os/event01/clapping_bravo.mp3',
                 from: 0,
-                to: 550
+                to: 5000
             });
+            soundManager.fadeTo('bravo', 5000);
             sound.play();
         }
 
