@@ -461,7 +461,7 @@ client.addListener('join', function (channel, username) {
                     console.log('user: ' + username);
                     console.log('joinUsers: ' + joinAccouncedUsers);
                     console.log('hasContains? ' + contains(user, joinAccouncedUsers));
-                    if (!username.startsWith('justinfan') && !contains(username, joinAccouncedUsers) && init) {
+                    if (!username.startsWith('justinfan') && !contains(username, joinAccouncedUsers)) {
                         if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
                         if (qs['firebase']) {
                             var ref = new Firebase("https://" + qs['firebase'] + ".firebaseio.com/");
@@ -536,13 +536,11 @@ client.addListener('crash', function () {
 		chatNotice('Crashed', 10000, 4, 'chat-crash');
 	});
 
-var init = false;
 getChatters(qs['channel']).subscribe(function (chatter) {
     console.log('add: ' + chatter + ' to ' + joinAccouncedUsers);
     put(chatter, joinAccouncedUsers);
 }, function (e) {}, function () {
     console.log('Imported users')
-    init = true;
 });
 
 function contains(item, arr) {
