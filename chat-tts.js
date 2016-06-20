@@ -541,6 +541,7 @@ getChatters(qs['channel']).subscribe(function (chatter) {
     console.log('add: ' + chatter + ' to ' + joinAccouncedUsers);
     put(chatter, joinAccouncedUsers);
 }, function (e) {}, function () {
+    console.log('Imported users')
     init = true;
 });
 
