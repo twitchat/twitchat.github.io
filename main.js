@@ -341,7 +341,7 @@ client.addListener('join', function (channel, username) {
                         //if(showConnectionNotices) chatNotice(capitalize('Joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
 		}
                 put(username, joinAccouncedUsers);
-                if (!username.startsWith('justinfan') && !contains(joinAccouncedUsers)) {
+                if (!username.startsWith('justinfan') && !contains(username, joinAccouncedUsers)) {
                     if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
                 }
 	});

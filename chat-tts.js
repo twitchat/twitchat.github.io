@@ -461,7 +461,7 @@ client.addListener('join', function (channel, username) {
                     put(channel, joinAccounced);
                     put(username, joinAccouncedUsers);
 
-                    if (!username.startsWith('justinfan') && !contains(joinAccouncedUsers)) {
+                    if (!username.startsWith('justinfan') && !contains(username, joinAccouncedUsers)) {
                         if(showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
                         if (qs['firebase']) {
                             var ref = new Firebase("https://" + qs['firebase'] + ".firebaseio.com/");
