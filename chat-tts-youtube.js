@@ -761,7 +761,6 @@ if (qs['liveChatId'] && qs['liveChatKey']) {
         return getLiveChatMessages(qs['liveChatId'], qs['liveChatKey']);
     }).subscribe(function (chat) {
         console.log(chat);
-        //console.log(chat.id);
         var contains = function (item, arr) {
             return arr.indexOf(item) >= 0;
         };
@@ -777,8 +776,6 @@ if (qs['liveChatId'] && qs['liveChatKey']) {
 
             handleChat(qs['channel'], user, chat.textMessageDetails.messageText, true);
         }
-    }, function (e) {
-        console.log(e);
     });
 }
 
@@ -787,13 +784,10 @@ var lastMsgDate = new Date();
 function getLiveChatMessages(liveChatId, apiKey) {
     var liveChatUrl = 'https://www.googleapis.com/youtube/v3/liveChat/messages?liveChatId=' + liveChatId + '&part=snippet&key=' +  apiKey;
     return rxfetch(liveChatUrl).map(function (chat) {
-        console.log(chat);
         return chat.items;
     }).flatMap(function (items) {
-        console.log(items);
         return Rx.Observable.from(items);
     }).map(function (item) {
-        console.log(item);
         return item.snippet;
     });
 }
@@ -802,7 +796,6 @@ function rxfetch(url) {
   return Rx.Observable.create(function (observer) {
     fetch(url).then(function (res) { return res.json(); })
       .then(function (json) {
-        //console.log(json);
         observer.onNext(json);
         observer.onCompleted();
       }).catch(observer.onError);
