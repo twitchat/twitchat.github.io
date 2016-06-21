@@ -767,7 +767,7 @@ if (qs['youtube_liveChatId'] && qs['youtube_apikey']) {
             return arr.indexOf(item) >= 0;
         };
 
-        // FIXME chat.id not found, use chat.publishedAt instead
+        // FIXME chat.id not found for webpage, use chat.publishedAt instead
         if (!contains(chat.publishedAt, liveChatMessageIds)) {
             var user = {
                 username: 'youtube',
