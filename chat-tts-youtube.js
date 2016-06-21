@@ -761,14 +761,14 @@ if (qs['liveChatId'] && qs['liveChatKey']) {
         return getLiveChatMessages(qs['liveChatId'], qs['liveChatKey']);
     }).subscribe(function (chat) {
         console.log(chat);
-        console.log(chat.id);
-        console.log(liveChatMessageIds);
+        //console.log(chat.id);
         var contains = function (item, arr) {
             return arr.indexOf(item) >= 0;
         };
 
-        // FIXME chat.id not found for webpage, use chat.publishedAt instead
-        if (!contains(chat.publishedAt, liveChatMessageIds)) {
+        var publishedAt = new Date(chat.publishedAt);
+        if (publishedAt > lastMsgDate) {
+            lastMsgDate = publishedAt;
             var user = {
                 username: 'youtube',
                 name: qs['channel'],
@@ -777,19 +777,23 @@ if (qs['liveChatId'] && qs['liveChatKey']) {
 
             handleChat(qs['channel'], user, chat.textMessageDetails.messageText, true);
         }
-        put(chat.publishedAt, liveChatMessageIds);
+    }, function (e) {
+        console.log(e);
     });
 }
 
-var liveChatMessageIds = [];
+var lastMsgDate = new Date();
 
 function getLiveChatMessages(liveChatId, apiKey) {
-    var liveChatUrl = 'https://www.googleapis.com/youtube/v3/liveChat/messages?liveChatId=' + liveChatId + '&part=id,snippet&key=' +  apiKey;
+    var liveChatUrl = 'https://www.googleapis.com/youtube/v3/liveChat/messages?liveChatId=' + liveChatId + '&part=snippet&key=' +  apiKey;
     return rxfetch(liveChatUrl).map(function (chat) {
+        console.log(chat);
         return chat.items;
     }).flatMap(function (items) {
+        console.log(items);
         return Rx.Observable.from(items);
     }).map(function (item) {
+        console.log(item);
         return item.snippet;
     });
 }
