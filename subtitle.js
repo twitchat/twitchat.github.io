@@ -166,7 +166,10 @@ subtitleSubject.debounce(300)
         .subscribe(function (msg) {
         });
 
-$("#subtitle").hide();
+Rx.Observable.just(0)
+    .delay(3000).subscribe(function (i) {
+        $("#subtitle").hide();
+    })
 function handleChat(channel, user, message, self) {
     if (message.trim().startsWith('_')) {
         subtitleSubject.onNext(message.trim().slice('_'.length));

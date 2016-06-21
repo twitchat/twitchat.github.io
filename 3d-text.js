@@ -153,20 +153,23 @@ subtitleSubject.debounce(500)
     });
 */
 subtitleSubject.debounce(300)
-        .doOnNext(function (msg) {
-            $("#text").show();
-            $("#text").text(msg);
-        })
-        .debounce(5000)
-        .throttle(5000)
-        .delay(5000)
-        .doOnNext(function (msg) {
-            $("#text").hide();
-        })
-        .subscribe(function (msg) {
-        });
+    .doOnNext(function (msg) {
+        $("#text").show();
+        $("#text").text(msg);
+    })
+    .debounce(5000)
+    .throttle(5000)
+    .delay(5000)
+    .doOnNext(function (msg) {
+        $("#text").hide();
+    })
+    .subscribe(function (msg) {
+    });
 
-$("#text").hide();
+Rx.Observable.just(0)
+    .delay(3000).subscribe(function (i) {
+        $("#text").hide();
+    })
 function handleChat(channel, user, message, self) {
     if (message.trim().startsWith('_')) {
         subtitleSubject.onNext(message.trim().slice('_'.length));
