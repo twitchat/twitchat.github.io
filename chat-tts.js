@@ -497,7 +497,7 @@ client.addListener('join', function (channel, username) {
 
 
                                         var welcomeMsg;
-                                        if (stay_duration > 0) {
+                                        if (stay_duration > 10) { // avoid stay recorded
                                             welcomeMsg = '歡迎再次來到 ' + alias + ' 的遊戲間 ' + username;
                                         } else {
                                             welcomeMsg = '歡迎第一次來到 ' + alias + ' 的遊戲間 ' + username;
