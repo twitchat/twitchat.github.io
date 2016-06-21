@@ -784,7 +784,7 @@ if (qs['liveChatId'] && qs['liveChatKey']) {
 var liveChatMessageIds = [];
 
 function getLiveChatMessages(liveChatId, apiKey) {
-    var liveChatUrl = 'https://www.googleapis.com/youtube/v3/liveChat/messages?liveChatId=' + liveChatId + '&part=snippet&key=' +  apiKey;
+    var liveChatUrl = 'https://www.googleapis.com/youtube/v3/liveChat/messages?liveChatId=' + liveChatId + '&part=id,snippet&key=' +  apiKey;
     return rxfetch(liveChatUrl).map(function (chat) {
         return chat.items;
     }).flatMap(function (items) {
