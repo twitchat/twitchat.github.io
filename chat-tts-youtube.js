@@ -179,7 +179,7 @@ function handleChat(channel, user, message, self) {
 		chatLine = document.createElement('span'),
 		chatTail = document.createElement('span'),
 		chatChannel = document.createElement('span'),
-		chatAvatar = document.createElement('div'),
+		chatAvatar = document.createElement('span'),
 		chatName = document.createElement('span'),
 		chatColon = document.createElement('span'),
 		chatMessage = document.createElement('span');
@@ -756,9 +756,9 @@ function playSoundFadeOut(url, duration) {
 //  ]
 // }
 
-if (qs['youtube_liveChatId'] && qs['youtube_apikey']) {
+if (qs['liveChatId'] && qs['liveChatKey']) {
     Rx.Observable.interval(3 * SECONDS).timeInterval().flatMap(function (i) {
-        return getLiveChatMessages(liveChatId, webApiKey);
+        return getLiveChatMessages(qs['liveChatId'], qs['liveChatKey']);
     }).subscribe(function (chat) {
         console.log(chat);
         console.log(chat.id);
