@@ -84,15 +84,30 @@ channels = ['yongjhih', 'mistakelolz', 'twitchplayspokemon'], // Channels to ini
 }
 var alias = qs['alias'] ? qs['alias'] : qs['channel'];
 
+var options = {
+    options: {
+        debug: true
+    },
+    channels: channels
+};
+
+if (qs['username'] && qs['password']) {
+    options = {
+        options: {
+            debug: true
+        },
+        identity: {
+            username: qs['username'],
+            password: qs['password']
+        },
+        channels: channels
+    };
+}
+
 var chat = document.getElementById('chat'),
 	defaultColors = ['rgb(255, 0, 0)','rgb(0, 0, 255)','rgb(0, 128, 0)','rgb(178, 34, 34)','rgb(255, 127, 80)','rgb(154, 205, 50)','rgb(255, 69, 0)','rgb(46, 139, 87)','rgb(218, 165, 32)','rgb(210, 105, 30)','rgb(95, 158, 160)','rgb(30, 144, 255)','rgb(255, 105, 180)','rgb(138, 43, 226)','rgb(0, 255, 127)'],
 	randomColorsChosen = {},
-	clientOptions = {
-			options: {
-					debug: true
-				},
-			channels: channels
-		},
+        clientOptions = options,
 	client = new irc.client(clientOptions);
 
 function dehash(channel) {
@@ -457,7 +472,9 @@ client.addListener('disconnected', function (reason) {
 client.addListener('reconnect', function () {
 		if(showConnectionNotices) chatNotice('Reconnected', 1000, 'chat-connection-good-reconnect');
 	});
-client.addListener('join', function (channel, username) {
+client.on("join", function (channel, username, self) {
+                    console.log(channel);
+                    console.log(username);
 
                     var contains = function (item, arr) {
                         return arr.indexOf(item) >= 0;
@@ -510,7 +527,8 @@ client.addListener('join', function (channel, username) {
                                             emotes: []
                                         };
 
-                                        handleChat(channel, user, welcomeMsg, true);
+                                        client.say(channel, welcomeMsg);
+                                        //handleChat(channel, user, welcomeMsg, true);
 
                                         console.log(chatterSnap.key());
                                         console.log(chatterSnap.val());
@@ -531,7 +549,8 @@ client.addListener('join', function (channel, username) {
                                     emotes: []
                                 };
 
-                                handleChat(channel, user, welcomeMsg, true);
+                                client.say(channel, welcomeMsg);
+                                //handleChat(channel, user, welcomeMsg, true);
                             }
                         }
                     }
@@ -760,7 +779,6 @@ if (qs['liveChatId'] && qs['liveChatKey']) {
     Rx.Observable.interval(3 * SECONDS).timeInterval().flatMap(function (i) {
         return getLiveChatMessages(qs['liveChatId'], qs['liveChatKey']);
     }).subscribe(function (chat) {
-        console.log(chat);
         var contains = function (item, arr) {
             return arr.indexOf(item) >= 0;
         };
