@@ -464,19 +464,17 @@ client.addListener('join', function (channel, username) {
                     };
 
                     console.log('!startsWith: ' + username + ': ' + (!username.startsWith('justinfan')));
-                    console.log('contains: ' + username + ': ' + contains(user, joinAccouncedUsers));
-                    console.log('!contains: ' + username + ': ' + !contains(user, joinAccouncedUsers));
+                    console.log('contains: ' + username + ': ' + contains(username, joinAccouncedUsers));
+                    console.log('!contains: ' + username + ': ' + !contains(username, joinAccouncedUsers));
                     console.log('joinAccouncedUsers: ' + joinAccouncedUsers);
                     console.log('!startsWith && !contains("' + username + '"): ' + (!username.startsWith('justinfan') && !contains(username, joinAccouncedUsers)));
 
+                    var contained = contains(username, joinAccouncedUsers);
+                    if (!contained) put(username, joinAccouncedUsers);
+
                     if (!username.startsWith('justinfan')) {
                         console.log('!"' + username + '".startsWith:' + !username.startsWith('justinfan'));
-                        if (!contains(username, joinAccouncedUsers)) {
-                            console.log('contins("' + username + '", joinAccouncedUsers): ' + contains(username, joinAccouncedUsers));
-                            console.log('!contins("' + username + '", joinAccouncedUsers): ' + !contains(username, joinAccouncedUsers));
-                            console.log('!contains{: ' + username + ': ' + !contains(user, joinAccouncedUsers));
-                            put(username, joinAccouncedUsers);
-                            console.log('!contains}: ' + username + ': ' + !contains(user, joinAccouncedUsers));
+                        if (!contained) {
                             if (showConnectionNotices) chatNotice(capitalize(dehash(username)) + ' joined ' + capitalize(dehash(channel)), 1000, -1, 'chat-room-join');
                             if (qs['firebase']) {
                                 console.log("welcomeMsg: ");
@@ -565,7 +563,7 @@ function put(item, arr) {
         return arr.indexOf(item) >= 0;
     };
 
-    if (contains(item, arr)) {
+    if (!contains(item, arr)) {
         arr.push(item);
     }
 }
