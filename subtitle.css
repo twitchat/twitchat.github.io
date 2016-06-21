@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+    background-color: #0f0;
+}
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em;
+}
+.footer, .push {
+    height: 4em;
+    text-align: center;
+}
+
+#subtitle {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px 20px;
+    font-size: 32px;
+    color: white;
+    text-shadow: 1px 1px 2px #000; /* horizontal-offset vertical-offset 'blur' colour */
+    -moz-text-shadow: 0 0 1px #000;
+    -webkit-text-shadow: 0 0 1px #000;
+}

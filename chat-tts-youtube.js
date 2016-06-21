@@ -82,8 +82,6 @@ channels = ['yongjhih', 'mistakelolz', 'twitchplayspokemon'], // Channels to ini
 	showHosting = true, // Show when the channel is hosting or not
 	showConnectionNotices = true; // Show messages like "Connected" and "Disconnected"
 }
-var alias = qs['alias'] ? qs['alias'] : qs['channel'];
-
 var options = {
     options: {
         debug: true
@@ -301,7 +299,7 @@ function handleChat(channel, user, message, self) {
         }
         else if (startsWithIgnoreCase(message.trim(), '!godlike')) {
             //soundManager.createSound({ url: 'http://vignette2.wikia.nocookie.net/leagueoflegends/images/e/e9/Female1_OnKillingSpreeSet5You1.ogg'}).play();
-            playSound({ url: 'http://vignette2.wikia.nocookie.net/leagueoflegends/images/e/e9/Female1_OnKillingSpreeSet5You1.ogg'}).play();
+            playSound('http://vignette2.wikia.nocookie.net/leagueoflegends/images/e/e9/Female1_OnKillingSpreeSet5You1.ogg').play();
         }
         else if (startsWithIgnoreCase(message.trim(), '!laugh1')) {
             playSound('http://vignette2.wikia.nocookie.net/leagueoflegends/images/d/d0/Teemo.laugh1.ogg');
@@ -475,6 +473,8 @@ client.addListener('reconnect', function () {
 client.on("join", function (channel, username, self) {
                     console.log(channel);
                     console.log(username);
+
+                    var alias = qs['alias'] ? qs['alias'] : channel;
 
                     var contains = function (item, arr) {
                         return arr.indexOf(item) >= 0;
