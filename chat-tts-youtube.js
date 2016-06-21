@@ -520,15 +520,19 @@ client.on("join", function (channel, username, self) {
                                             welcomeMsg = '歡迎第一次來到 ' + alias + ' 的遊戲間 ' + username;
                                         }
                                         responsiveVoice.speak(welcomeMsg, 'Chinese Female');
-                                        var user;
-                                        user = {
-                                            username: qs['channel'],
-                                            name: qs['channel'],
-                                            emotes: []
-                                        };
 
-                                        client.say(channel, welcomeMsg);
-                                        //handleChat(channel, user, welcomeMsg, true);
+                                        if (qs['username'] && qs['password']) {
+                                            client.say(channel, welcomeMsg);
+                                        } else {
+                                            var user;
+                                            user = {
+                                                username: channel,
+                                                name: channel,
+                                                emotes: []
+                                            };
+
+                                            handleChat(channel, user, welcomeMsg, true);
+                                        }
 
                                         console.log(chatterSnap.key());
                                         console.log(chatterSnap.val());
@@ -542,15 +546,19 @@ client.on("join", function (channel, username, self) {
                             } else {
                                 var welcomeMsg = '歡迎來到 ' + alias + ' 的遊戲間 ' + username;
                                 responsiveVoice.speak(welcomeMsg, 'Chinese Female');
-                                var user;
-                                user = {
-                                    username: qs['channel'],
-                                    name: qs['channel'],
-                                    emotes: []
-                                };
 
-                                client.say(channel, welcomeMsg);
-                                //handleChat(channel, user, welcomeMsg, true);
+                                if (qs['username'] && qs['password']) {
+                                    client.say(channel, welcomeMsg);
+                                } else {
+                                    var user;
+                                    user = {
+                                        username: channel,
+                                        name: channel,
+                                        emotes: []
+                                    };
+
+                                    handleChat(channel, user, welcomeMsg, true);
+                                }
                             }
                         }
                     }
