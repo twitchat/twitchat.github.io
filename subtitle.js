@@ -138,17 +138,38 @@ function badges(chan, user, isBot) {
 	return chatBadges;
 }
 
+var subtitleSubject = new Rx.Subject();
+/*
+subtitleSubject.debounce(500)
+        .doOnNext(function (msg) {
+            $("#subtitle").show();
+            $("#subtitle").text(msg);
+        }).flatMap(function (msg) {
+            return Rx.Observable.just(msg).debounce(5000).throttle(5000).delay(5000).doOnNext(function (msg) {
+                $("#subtitle").hide();
+            });
+        })
+    .subscribe(function (msg) {
+    });
+*/
+subtitleSubject.debounce(300)
+        .doOnNext(function (msg) {
+            $("#subtitle").show();
+            $("#subtitle").text(msg);
+        })
+        .debounce(5000)
+        .throttle(5000)
+        .delay(5000)
+        .doOnNext(function (msg) {
+            $("#subtitle").hide();
+        })
+        .subscribe(function (msg) {
+        });
+
 $("#subtitle").hide();
 function handleChat(channel, user, message, self) {
     if (message.trim().startsWith('_')) {
-        Rx.Observable.just(message.trim().slice('_'.length))
-            .debounce(500 /* ms */)
-            .doOnNext(function (msg) {
-                $("#subtitle").show();
-                $("#subtitle").text(msg);
-            }).delay(5000).doOnNext(function (msg) {
-                $("#subtitle").hide();
-            }).subscribe();
+        subtitleSubject.onNext(message.trim().slice('_'.length));
     }
 }
 
