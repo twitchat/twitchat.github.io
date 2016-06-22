@@ -4,24 +4,31 @@
 html, body {
     height: 100%;
     background-color: #0f0;
+    overflow:hidden;
 }
 .wrapper {
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    margin: 0 auto -4em;
+    margin: 0 auto -7em;
 }
+
 .footer, .push {
-    height: 4em;
+    position: relative;
+    min-height: 7em;
+    bottom: 0;
     text-align: center;
 }
 
 #subtitle {
     background-color: rgba(0, 0, 0, 0.8);
-    padding: 10px 20px;
+    padding: 5px 15px;
     font-size: 32px;
     color: white;
     text-shadow: 1px 1px 2px #000; /* horizontal-offset vertical-offset 'blur' colour */
     -moz-text-shadow: 0 0 1px #000;
     -webkit-text-shadow: 0 0 1px #000;
+    line-height: 140%;
+    word-wrap: break-word;
+    margin-bottom: 1em;
 }
