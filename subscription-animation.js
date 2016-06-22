@@ -13,8 +13,8 @@ var qs;
 })();
 
 soundManager.setup({
-url: 'https://github.com/hiddentao/google-tts/raw/master/soundmanager2_debug.swf',
-//url: 'swf/soundmanager2.swf',
+//url: 'https://github.com/hiddentao/google-tts/raw/master/soundmanager2_debug.swf',
+url: 'swf/soundmanager2.swf',
 preferFlash: false,
 onready: function() {
     var HTML = '\
@@ -374,7 +374,7 @@ var HOUR = 60 * MINITES;
 var lastSubscribeDate = new Date();
 
 Rx.Observable.interval(10 * SECONDS).timeInterval().flatMap(function (i) {
-    playSound('https://www.myinstants.com/media/sounds/cggasa.mp3');
+    soundManager.createSound({ url: 'https://www.myinstants.com/media/sounds/cggasa.mp3' }).play();
     return getTwitchFollows(qs['channel']);
 }).subscribe(function (follow) {
     var created_at = new Date(follow.created_at);
