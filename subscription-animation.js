@@ -13,8 +13,8 @@ var qs;
 })();
 
 soundManager.setup({
-//url: 'https://github.com/hiddentao/google-tts/raw/master/soundmanager2_debug.swf',
-url: 'swf/soundmanager2.swf',
+url: 'https://github.com/hiddentao/google-tts/raw/master/soundmanager2_debug.swf',
+//url: 'swf/soundmanager2.swf',
 preferFlash: false,
 onready: function() {
     var HTML = '\
@@ -33,26 +33,6 @@ onready: function() {
     $("#tts_demo").html(HTML);
 }
 });
-
-if(typeof soundManager !== 'undefined') {
-    soundManager.fadeTo = function (id, dur, toVol, callback) {
-        dur      = dur || 1000;
-        toVol    = toVol || 0;
-        callback = typeof callback == 'function' ? callback : function () {};
-        var s    = soundManager.getSoundById(id),
-        k = s.volume,
-        t = dur/Math.abs(k - toVol),
-        i = setInterval(function () {
-            k = k > toVol ? k - 1 : k + 1;
-            s.setVolume(k);
-            if (k == toVol) {
-                callback.call(this);
-                clearInterval(i);
-                i = null;
-            }
-        }, t);
-    }
-}
 
 var channels;
 if ("channel" in qs) {
