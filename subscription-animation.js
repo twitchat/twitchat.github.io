@@ -285,17 +285,18 @@ var subject = new Rx.Subject();
 subject.doOnNext(function (username) {
     console.log(username + " subscription");
 })
-.map(function (value) {
-    return Rx.Observable.return(value)
+.map(function (username) {
+    return Rx.Observable.return(username)
         .doOnNext(function (username) {
             console.log(username + " playsound");
             //playSoundFadeOut('https://www.myinstants.com/media/sounds/cggasa.mp3', 10000);
-            playSounds('sound/cggasa.mp3');
-            $("subscription").show();
+            //playSounds('sound/cggasa.mp3');
+            playSound('https://www.myinstants.com/media/sounds/cggasa.mp3');
+            $("#subscription").show();
         })
         .delay(10000)
         .doOnNext(function (msg) {
-            $("subscription").hide();
+            $("#subscription").hide();
         });
 })
 .concatAll()
@@ -373,6 +374,7 @@ var HOUR = 60 * MINITES;
 var lastSubscribeDate = new Date();
 
 Rx.Observable.interval(10 * SECONDS).timeInterval().flatMap(function (i) {
+    playSound('https://www.myinstants.com/media/sounds/cggasa.mp3');
     return getTwitchFollows(qs['channel']);
 }).subscribe(function (follow) {
     var created_at = new Date(follow.created_at);
