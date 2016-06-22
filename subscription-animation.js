@@ -268,14 +268,13 @@ subject.doOnNext(function (username) {
     return Rx.Observable.return(username)
         .doOnNext(function (username) {
             console.log(username + " playsound");
-            //playSoundFadeOut('https://www.myinstants.com/media/sounds/cggasa.mp3', 10000);
-            //playSounds('sound/cggasa.mp3');
-            playSound('https://www.myinstants.com/media/sounds/cggasa.mp3');
-            //$("#subscription").show();
+            //playSoundFadeOut('https://www.myinstants.com/media/sounds/epic.swf_1.mp3', 10000);
+            playSound('https://www.myinstants.com/media/sounds/epic.swf_1.mp3');
+            $("#subscription").show();
         })
         .delay(10000)
         .doOnNext(function (msg) {
-            //$("#subscription").hide();
+            $("#subscription").hide();
         });
 })
 .concatAll()
@@ -353,9 +352,7 @@ var HOUR = 60 * MINITES;
 var lastSubscribeDate = new Date();
 
 Rx.Observable.interval(10 * SECONDS).timeInterval().flatMap(function (i) {
-    //var sound = soundManager.createSound({ url: 'https://www.myinstants.com/media/sounds/cggasa.mp3' });
-    //sound.play();
-    playSound('sounds/cggasa.mp3');
+    //playSound('https://www.myinstants.com/media/sounds/epic.swf_1.mp3');
     return getTwitchFollows(qs['channel']);
 }).subscribe(function (follow) {
     var created_at = new Date(follow.created_at);
@@ -368,7 +365,7 @@ Rx.Observable.interval(10 * SECONDS).timeInterval().flatMap(function (i) {
             client.say(capitalize(dehash(qs['channel'])), welcomeSubscribeMsg);
         }
         // welcomeAnimation and welcomeSound
-        //subject.onNext(follow.user.name);
+        subject.onNext(follow.user.name);
     }
 });
 
