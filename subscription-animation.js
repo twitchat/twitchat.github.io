@@ -13,14 +13,10 @@ var qs;
 })();
 
 soundManager.setup({
-//url: 'https://github.com/hiddentao/google-tts/raw/master/soundmanager2_debug.swf',
-url: 'swf/soundmanager2.swf',
+url: 'https://github.com/hiddentao/google-tts/raw/master/soundmanager2_debug.swf',
+//url: 'swf/soundmanager2.swf',
 preferFlash: false,
 onready: function() {
-  if (!window.GoogleTTS) {
-    $("#error").text("Sorry, the google-tts script couldn't be loaded.");
-    return;
-  } else {
     var HTML = '\
     <div> \
         <label for="demo_language">Language:</label> \
@@ -35,7 +31,6 @@ onready: function() {
     <button id="demo_play">Play!</button> \
     ';
     $("#tts_demo").html(HTML);
-  }
 }
 });
 
@@ -295,7 +290,7 @@ subject.doOnNext(function (username) {
         .doOnNext(function (username) {
             console.log(username + " playsound");
             //playSoundFadeOut('https://www.myinstants.com/media/sounds/cggasa.mp3', 10000);
-            //playSounds('sound/cggasa.mp3');
+            playSounds('sound/cggasa.mp3');
             $("subscription").show();
         })
         .delay(10000)
@@ -324,9 +319,85 @@ function put(item, arr) {
     }
 }
 
+//https://api.twitch.tv/kraken/channels/xxxxxxxx/follows
+//
+// {
+//     "follows": [
+//     {
+//         "created_at": "2016-06-22T19:24:46Z",
+//         "_links": {
+//             "self": "https://api.twitch.tv/kraken/users/uuuuuuuuu/follows/channels/xxxxxxxx"
+//         },
+//         "notifications": false,
+//         "user": {
+//             "_id": 00000000,
+//             "name": "uuuuuuuuu",
+//             "created_at": "2014-09-04T17:49:18Z",
+//             "updated_at": "2016-06-22T19:30:20Z",
+//             "_links": {
+//                 "self": "https://api.twitch.tv/kraken/users/e4e2e7343"
+//             },
+//             "display_name": "uuuuuuuuu",
+//             "logo": "https://static-cdn.jtvnw.net/jtv_user_pictures/uuuuuuuuu-profile_image-ffffffffffffffff-300x300.jpeg",
+//             "bio": "xxxxxxxxxxxxxxxxxxxxxx",
+//             "type": "user"
+//         }
+//     }
+//     ],
+//     "_total": 1,
+//     "_links": {
+//         "self": "https://api.twitch.tv/kraken/channels/xxxxxxxx/follows?direction=DESC&limit=25&offset=0",
+//         "next": "https://api.twitch.tv/kraken/channels/xxxxxxxx/follows?cursor=0000000000000000000&direction=DESC&limit=25"
+//     },
+//     "_cursor": "0000000000000000000"
+// }
+
+function getTwitchFollows(channel) {
+    var url = 'https://api.twitch.tv/kraken/channels/' + channel + '/follows';
+    return rxfetch(url).flatMap(function (json) {
+        return Rx.Observable.from(json.follows);
+    });
+}
+
+function rxTwitch(url) {
+  return rxfetch(url).flatMap(function (json) {
+    var next = (json._links && json._links.next) ? rxfetch(json._links.next) : Rx.Observable.empty();
+    return Rx.Observable.concat(Rx.Observable.just(json), next);
+  });
+}
+
 var SECONDS = 1000;
 var MINITES = 60 * SECONDS;
 var HOUR = 60 * MINITES;
+
+var lastSubscribeDate = new Date();
+
+Rx.Observable.interval(10 * SECONDS).timeInterval().flatMap(function (i) {
+    return getTwitchFollows(qs['channel']);
+}).subscribe(function (follow) {
+    var created_at = new Date(follow.created_at);
+    if (created_at > lastSubscribeDate) {
+        lastSubscribeDate = created_at;
+
+        if (qs['username'] && qs['password']) {
+            var welcomeSubscribeMsg = '歡迎 ' + follow.user.name + ' 的訂閱！';
+            console.log(welcomeSubscribeMsg);
+            client.say(capitalize(dehash(qs['channel'])), welcomeSubscribeMsg);
+        }
+        // welcomeAnimation and welcomeSound
+        subject.onNext(follow.user.name);
+    }
+});
+
+function rxfetch(url) {
+  return Rx.Observable.create(function (observer) {
+    fetch(url).then(function (res) { return res.json(); })
+      .then(function (json) {
+        observer.onNext(json);
+        observer.onCompleted();
+      }).catch(observer.onError);
+  });
+}
 
 function startsWithIgnoreCase(source, pattern) {
     return source.substr(0, pattern.length).toLowerCase().startsWith(pattern.toLowerCase());
