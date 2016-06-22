@@ -703,7 +703,7 @@ function playSound(url) {
  * Allow mixed sounds
  */
 function playSounds(url) {
-    sound = soundManager.createSound({
+    var sound = soundManager.createSound({
         url: url
     });
     sound.play();
@@ -711,7 +711,7 @@ function playSounds(url) {
 
 function playSoundFadeOut(url, duration) {
     var id = Math.random().toString();
-    sound = soundManager.createSound({
+    var sound = soundManager.createSound({
         id: id,
         url: url,
         from: 0,
