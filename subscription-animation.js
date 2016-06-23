@@ -286,6 +286,7 @@ client.on("subscription", function (channel, username) {
 });
 client.on("resub", function (channel, username, months, message) {
     console.log(username + " resub");
+    subject.onNext(username);
 });
 
 function contains (i, a) {

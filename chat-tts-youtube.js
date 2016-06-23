@@ -818,6 +818,22 @@ function getLiveChatMessages(liveChatId, apiKey) {
     });
 }
 
+// ref. http://stackoverflow.com/questions/14173428/how-to-change-page-results-with-youtube-data-api-v3
+function getAllLiveChatMessages(liveChatId, apiKey, url) {
+    var liveChatUrl = 'https://www.googleapis.com/youtube/v3/liveChat/messages?liveChatId=' + liveChatId + '&part=snippet&key=' + apiKey;
+    if (!url) url = liveChatUrl;
+    return rxfetch(url).flatMap(function (json) {
+        var next = (json.nextPageToken) ? getAllLiveChatMessages(liveChatId, apiKey, liveChatUrl + '&pageToken=' + nextPageToken) : Rx.Observable.empty();
+        return Rx.Observable.concat(Rx.Observable.just(json), next);
+    }).map(function (chat) {
+        return chat.items;
+    }).flatMap(function (items) {
+        return Rx.Observable.from(items);
+    }).map(function (item) {
+        return item.snippet;
+    });
+}
+
 function rxfetch(url) {
   return Rx.Observable.create(function (observer) {
     fetch(url).then(function (res) { return res.json(); })
