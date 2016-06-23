@@ -333,7 +333,7 @@ function put(item, arr) {
 
 function getTwitchFollows(channel) {
     var url = 'https://api.twitch.tv/kraken/channels/' + channel + '/follows';
-    return rxfetch(url).flatMap(function (json) {
+    return rxTwitch(url).flatMap(function (json) {
         return Rx.Observable.from(json.follows);
     });
 }
