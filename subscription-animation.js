@@ -340,7 +340,7 @@ function getTwitchFollows(channel) {
 
 function rxTwitch(url) {
   return rxfetch(url).flatMap(function (json) {
-    var next = (json._links && json._links.next) ? rxfetch(json._links.next) : Rx.Observable.empty();
+    var next = (json._links && json._links.next && json._cursor) ? rxTwitch(json._links.next) : Rx.Observable.empty();
     return Rx.Observable.concat(Rx.Observable.just(json), next);
   });
 }
@@ -355,6 +355,7 @@ Rx.Observable.interval(10 * SECONDS).timeInterval().flatMap(function (i) {
     //playSound('https://www.myinstants.com/media/sounds/epic.swf_1.mp3');
     return getTwitchFollows(qs['channel']);
 }).subscribe(function (follow) {
+    console.log(follow.user.name);
     var created_at = new Date(follow.created_at);
     if (created_at > lastSubscribeDate) {
         lastSubscribeDate = created_at;
