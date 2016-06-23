@@ -146,6 +146,7 @@ v2：
 * https://github.com/chiruom/jquery.danmu.js
 * https://github.com/jabbany/ABPlayerHTML5
 * https://www.reddit.com/r/youtubegaming/comments/4kibiw/api_reading_live_chat_messages_from_javascript/
+* https://www.tmijs.org/forums/index.php?/topic/55-donate-and-follow-events/
 
 ## firebase scripts
 

@@ -356,7 +356,6 @@ Rx.Observable.interval(10 * SECONDS).timeInterval().flatMap(function (i) {
     //playSound('https://www.myinstants.com/media/sounds/epic.swf_1.mp3');
     return getTwitchFollows(qs['channel']);
 }).subscribe(function (follow) {
-    console.log(follow.user.name);
     var created_at = new Date(follow.created_at);
     if (created_at > lastSubscribeDate) {
         lastSubscribeDate = created_at;
