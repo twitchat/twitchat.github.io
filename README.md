@@ -139,6 +139,8 @@ v2：
 * 留言板功能
 * 觀賞 VOD 可補彈幕與聊天訊息，需要區分即時訊息還是老訊息
 
+* twitchat.js for polling twitch api as callback event
+
 ## ref.
 
 * https://github.com/jabbany/CommentCoreLibrary
