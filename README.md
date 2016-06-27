@@ -130,7 +130,9 @@ v2：
 * 每x/熱門關鍵字/詞句
 * 每x/最多贊助金額
 
-* Wavefrom bar
+* Waveform bar: 整體聲音
+* Waveform bar: 麥克風聲音
+* Waveform bar: 聊天頻率
 * Click zoom out / highlight chat
 * 依人合併聊天訊息
 
