@@ -334,7 +334,11 @@ function put(item, arr) {
 
 function getTwitchFollows(channel) {
     var url = 'https://api.twitch.tv/kraken/channels/' + channel + '/follows';
-    return rxTwitch(url).flatMap(function (json) {
+    return rxTwitch(url, {
+        headers: {
+            'Client-ID': '1w82azj6ecsz39o06clnmpmks4n86bu'
+        }
+    }).flatMap(function (json) {
         return Rx.Observable.from(json.follows);
     });
 }
